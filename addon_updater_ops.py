@@ -1374,15 +1374,15 @@ def register(bl_info):
         return
     updater.clear_state()  # Clear internal vars, avoids reloading oddities.
 
-    # https://github.com/Fast-64/fast64
+    # https://github.com/ManIsCat2/Fast64-Gart
     updater.engine = "Github"
-    updater.user = "Fast-64"
-    updater.repo = "fast64"
+    updater.user = "ManIsCat2"
+    updater.repo = "Fast64-Gart"
 
     # updater.addon = # define at top of module, MUST be done first
 
     # Website for manual addon download, optional but recommended to set.
-    updater.website = "https://github.com/Fast-64/fast64"
+    updater.website = "https://github.com/ManIsCat2/Fast64-Gart"
 
     # Used to check/compare versions.
     updater.current_version = bl_info["version"]

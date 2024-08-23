@@ -830,6 +830,8 @@ enumBehaviourPresets = [
     ("13002ea8", "Yellow Ball", "Yellow Ball"),
     ("1300091c", "Yellow Coin", "Yellow Coin"),
     ("13004538", "Yoshi", "Yoshi"),
+    # Coop things
+    ("14000000", "Scrolling Texture", "Scrolling Texture"),
 ]
 enumModelIDs = [
     ("Custom", "Custom", "Custom"),

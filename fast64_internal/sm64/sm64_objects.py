@@ -1139,20 +1139,43 @@ class SM64ObjectPanel(bpy.types.Panel):
 
         box.prop(game_object, "use_individual_params", text="Use Individual Behavior Params")
 
+        if obj.sm64_behaviour_enum == "14000000":
+                box.label(text="ScrollTex Properties:")
+                box.label(text="Xpos = speed")
+                box.label(text="-(Ypos) = vertices amount")
+                box.label(text="Zpos = axis")
+                box.label(text="Xrot = offset")
+                box.label(text="Zrot = scrolling type")
+
         if game_object.use_individual_params:
             individuals = box.box()
             individuals.label(text="Individual Behavior Parameters")
+            individuals.label(text=f"Result: {game_object.get_combined_bparams()}")
             column = individuals.column()
             for i in range(1, 5):
                 row = column.row()
                 row.prop(game_object, f"bparam{i}", text=f"Param {i}")
-            individuals.separator(factor=0.25)
-            individuals.label(text=f"Result: {game_object.get_combined_bparams()}")
+                individuals.separator(factor=0.25)
         else:
             box.separator(factor=0.5)
-            box.label(text="All Behavior Parameters")
-            box.prop(game_object, "bparams", text="")
-            parent_box.separator()
+            if obj.sm64_behaviour_enum == "14000000":
+                # /*
+                # * Scroll parameters are took from the object's properties:
+                #  *   Xpos = speed
+                # *   Ypos = scrolling behavior/axis
+                # *   Zpos = vertices amount
+                # *   Xrot = offset
+                # *   Yrot = scrolling type
+                # *   Zrot = cycle
+                # *   Behavior param = scroll target index
+                # */
+                box.label(text="Scroll Target Index")
+                box.prop(game_object, "bparams", text="")
+                parent_box.separator()
+            else:
+                box.label(text="All Behavior Parameters")
+                box.prop(game_object, "bparams", text="")
+                parent_box.separator()
 
     def draw(self, context):
         prop_split(self.layout, context.scene, "gameEditorMode", "Game")

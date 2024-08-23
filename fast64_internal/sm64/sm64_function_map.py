@@ -5051,6 +5051,9 @@ func_map = {
         "130044e0": "bhvTreasureChestTop",
         "130044fc": "bhvMips",
         "13004538": "bhvYoshi",
+        # Coop things
+        "14000000": "RM_Scroll_Texture",
+        # End
         "13004580": "bhvKoopa",
         "130045d0": "bhvKoopaRaceEndpoint",
         "130045f8": "bhvKoopaFlag",
@@ -10196,6 +10199,9 @@ func_map = {
         "130044e0": "bhvTreasureChestTop",
         "130044fc": "bhvMips",
         "13004538": "bhvYoshi",
+        # Coop things
+        "14000000": "RM_Scroll_Texture",
+        # End
         "13004580": "bhvKoopa",
         "130045d0": "bhvKoopaRaceEndpoint",
         "130045f8": "bhvKoopaFlag",
@@ -15346,6 +15352,9 @@ func_map = {
         "130044e0": "bhvTreasureChestTop",
         "130044fc": "bhvMips",
         "13004538": "bhvYoshi",
+        # Coop things
+        "14000000": "RM_Scroll_Texture",
+        # End
         "13004580": "bhvKoopa",
         "130045d0": "bhvKoopaRaceEndpoint",
         "130045f8": "bhvKoopaFlag",
@@ -20521,6 +20530,9 @@ func_map = {
         "130044e0": "bhvTreasureChestTop",
         "130044fc": "bhvMips",
         "13004538": "bhvYoshi",
+        # Coop things
+        "14000000": "RM_Scroll_Texture",
+        # End
         "13004580": "bhvKoopa",
         "130045d0": "bhvKoopaRaceEndpoint",
         "130045f8": "bhvKoopaFlag",
@@ -25696,6 +25708,9 @@ func_map = {
         "130044e0": "bhvTreasureChestTop",
         "130044fc": "bhvMips",
         "13004538": "bhvYoshi",
+        # Coop things
+        "14000000": "RM_Scroll_Texture",
+        # End
         "13004580": "bhvKoopa",
         "130045d0": "bhvKoopaRaceEndpoint",
         "130045f8": "bhvKoopaFlag",
@@ -30877,6 +30892,9 @@ func_map = {
         "130044e0": "bhvTreasureChestTop",
         "130044fc": "bhvMips",
         "13004538": "bhvYoshi",
+        # Coop things
+        "14000000": "RM_Scroll_Texture",
+        # End
         "13004580": "bhvKoopa",
         "130045d0": "bhvKoopaRaceEndpoint",
         "130045f8": "bhvKoopaFlag",
@@ -36059,6 +36077,9 @@ func_map = {
         "130044e0": "bhvTreasureChestTop",
         "130044fc": "bhvMips",
         "13004538": "bhvYoshi",
+        # Coop things
+        "14000000": "RM_Scroll_Texture",
+        # End
         "13004580": "bhvKoopa",
         "130045d0": "bhvKoopaRaceEndpoint",
         "130045f8": "bhvKoopaFlag",
@@ -41240,6 +41261,9 @@ func_map = {
         "130044e0": "bhvTreasureChestTop",
         "130044fc": "bhvMips",
         "13004538": "bhvYoshi",
+        # Coop things
+        "14000000": "RM_Scroll_Texture",
+        # End
         "13004580": "bhvKoopa",
         "130045d0": "bhvKoopaRaceEndpoint",
         "130045f8": "bhvKoopaFlag",
@@ -46421,6 +46445,9 @@ func_map = {
         "130044e0": "bhvTreasureChestTop",
         "130044fc": "bhvMips",
         "13004538": "bhvYoshi",
+        # Coop things
+        "14000000": "RM_Scroll_Texture",
+        # End
         "13004580": "bhvKoopa",
         "130045d0": "bhvKoopaRaceEndpoint",
         "130045f8": "bhvKoopaFlag",
@@ -51488,6 +51515,9 @@ func_map = {
         "130044e0": "bhvTreasureChestTop",
         "130044fc": "bhvMips",
         "13004538": "bhvYoshi",
+        # Coop things
+        "14000000": "RM_Scroll_Texture",
+        # End
         "13004580": "bhvKoopa",
         "130045d0": "bhvKoopaRaceEndpoint",
         "130045f8": "bhvKoopaFlag",

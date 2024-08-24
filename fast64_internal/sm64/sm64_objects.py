@@ -323,8 +323,9 @@ class SM64_Object:
                 )
         else: 
             texcrollLUA = os.path.join(bpy.path.abspath(bpy.context.scene.fast64.sm64.decomp_path), "texscroll.lua")
-            texcrollLUAFILE = open(texcrollLUA, "w", newline="\n")
-            texcrollLUAFILE.write(f'add_scroll_target({str(self.bparam)}, "VtxName")')
+            texcrollLUAFILE = open(texcrollLUA, "a", newline="\n")
+            texcrollLUAFILE.truncate(0)
+            texcrollLUAFILE.writelines(f'add_scroll_target({str(self.bparam)}, "VtxName")\n')
             texcrollLUAFILE.close()
             return (
                     "OBJECT("

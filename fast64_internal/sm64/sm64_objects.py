@@ -274,52 +274,80 @@ class SM64_Object:
         self.name = name  # to sort by when exporting
 
     def to_c(self):
-        if self.acts == 0x1F:
+        if str(self.behaviour) != "RM_Scroll_Texture":
+            if self.acts == 0x1F:
+                return (
+                    "OBJECT("
+                    + str(self.model)
+                    + ", "
+                    + str(int(round(self.position[0])))
+                    + ", "
+                    + str(int(round(self.position[1])))
+                    + ", "
+                    + str(int(round(self.position[2])))
+                    + ", "
+                    + str(int(round(math.degrees(self.rotation[0]))))
+                    + ", "
+                    + str(int(round(math.degrees(self.rotation[1]))))
+                    + ", "
+                    + str(int(round(math.degrees(self.rotation[2]))))
+                    + ", "
+                    + str(self.bparam)
+                    + ", "
+                    + str(self.behaviour)
+                    + ")"
+                )
+            else:
+                return (
+                    "OBJECT_WITH_ACTS("
+                    + str(self.model)
+                    + ", "
+                    + str(int(round(self.position[0])))
+                    + ", "
+                    + str(int(round(self.position[1])))
+                    + ", "
+                    + str(int(round(self.position[2])))
+                    + ", "
+                    + str(int(round(math.degrees(self.rotation[0]))))
+                    + ", "
+                    + str(int(round(math.degrees(self.rotation[1]))))
+                    + ", "
+                    + str(int(round(math.degrees(self.rotation[2]))))
+                    + ", "
+                    + str(self.bparam)
+                    + ", "
+                    + str(self.behaviour)
+                    + ", "
+                    + str(self.acts)
+                    + ")"
+                )
+        else: 
+            texcrollLUA = os.path.join(bpy.path.abspath(bpy.context.scene.fast64.sm64.decomp_path), "texscroll.lua")
+            texcrollLUAFILE = open(texcrollLUA, "w", newline="\n")
+            texcrollLUAFILE.write(f'add_scroll_target({str(self.bparam)}, "VtxName")')
+            texcrollLUAFILE.close()
             return (
-                "OBJECT("
-                + str(self.model)
-                + ", "
-                + str(int(round(self.position[0])))
-                + ", "
-                + str(int(round(self.position[1])))
-                + ", "
-                + str(int(round(self.position[2])))
-                + ", "
-                + str(int(round(math.degrees(self.rotation[0]))))
-                + ", "
-                + str(int(round(math.degrees(self.rotation[1]))))
-                + ", "
-                + str(int(round(math.degrees(self.rotation[2]))))
-                + ", "
-                + str(self.bparam)
-                + ", "
-                + str(self.behaviour)
-                + ")"
-            )
-        else:
-            return (
-                "OBJECT_WITH_ACTS("
-                + str(self.model)
-                + ", "
-                + str(int(round(self.position[0])))
-                + ", "
-                + str(int(round(self.position[1])))
-                + ", "
-                + str(int(round(self.position[2])))
-                + ", "
-                + str(int(round(math.degrees(self.rotation[0]))))
-                + ", "
-                + str(int(round(math.degrees(self.rotation[1]))))
-                + ", "
-                + str(int(round(math.degrees(self.rotation[2]))))
-                + ", "
-                + str(self.bparam)
-                + ", "
-                + str(self.behaviour)
-                + ", "
-                + str(self.acts)
-                + ")"
-            )
+                    "OBJECT("
+                    + str(self.model)
+                    + ", "
+                    + str(int(round(self.position[0])))
+                    + ", "
+                    + str(int(round(self.position[1])))
+                    + ", "
+                    + str(int(round(self.position[2])))
+                    + ", "
+                    + str(int(round(math.degrees(self.rotation[0]))))
+                    + ", "
+                    + str(int(round(math.degrees(self.rotation[1]))))
+                    + ", "
+                    + str(int(round(math.degrees(self.rotation[2]))))
+                    + ", "
+                    + str(self.bparam)
+                    + ", "
+                    + str(self.behaviour)
+                    + ")"
+                )
+
 
 
 class SM64_Whirpool:
@@ -1147,19 +1175,6 @@ class SM64ObjectPanel(bpy.types.Panel):
                 box.label(text="Zpos = axis")
                 box.label(text="Xrot = offset")
                 box.label(text="Zrot = scrolling type")
-
-
-                texcrollLUA = os.path.join(bpy.path.abspath(bpy.context.scene.fast64.sm64.decomp_path), "texscroll.lua")
-                
-                if os.path.exists(texcrollLUA):
-                    filegg = open(texcrollLUA, "r")
-                    with filegg as file:
-                        lines = file.readlines()
-                        for line in lines:
-                            if f'add_scroll_target({game_object.bparams}, "VtxName")' in line:
-                                print(f"Line already exists: {line.strip()}")
-                            else:
-                                filegg.write(f'add_scroll_target({game_object.bparams}, "VtxName")\n')
 
         if game_object.use_individual_params:
             individuals = box.box()

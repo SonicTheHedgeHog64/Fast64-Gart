@@ -2,6 +2,7 @@ import math, bpy, mathutils
 from bpy.utils import register_class, unregister_class
 from re import findall
 from .sm64_function_map import func_map
+import os
 
 from ..utility import (
     PluginError,
@@ -1146,6 +1147,19 @@ class SM64ObjectPanel(bpy.types.Panel):
                 box.label(text="Zpos = axis")
                 box.label(text="Xrot = offset")
                 box.label(text="Zrot = scrolling type")
+
+
+                texcrollLUA = os.path.join(bpy.path.abspath(bpy.context.scene.fast64.sm64.decomp_path), "texscroll.lua")
+                
+                if os.path.exists(texcrollLUA):
+                    filegg = open(texcrollLUA, "r")
+                    with filegg as file:
+                        lines = file.readlines()
+                        for line in lines:
+                            if f'add_scroll_target({game_object.bparams}, "VtxName")' in line:
+                                print(f"Line already exists: {line.strip()}")
+                            else:
+                                filegg.write(f'add_scroll_target({game_object.bparams}, "VtxName")\n')
 
         if game_object.use_individual_params:
             individuals = box.box()

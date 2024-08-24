@@ -457,6 +457,17 @@ def removeTexScrollFiles(exportDir, assetDir):
     if os.path.exists(texscrollHPath):
         os.remove(texscrollHPath)
 
+        #     texcrollLUA = os.path.join(exportDir + "\..", "texscroll.lua")
+    #texscrollHPath = os.path.join(assetDir, "texscroll.inc.h")
+
+    #texscrollCFile = open(texscrollCPath, "w", newline="\n")
+    #texscrollCFile.write(scrollData.source)
+    #texscrollCFile.close()
+
+    #texcrollLUAFILE = open(texcrollLUA, "w", newline="\n")
+   # texcrollLUAFILE.write('add_scroll_target(IndexOfScrollTargetObject, "VtxName")')
+   # texcrollLUAFILE.close()
+
 
 def writeTexScrollFiles(exportDir: str, assetDir: str, scrollData: CData):
     texscrollCPath = os.path.join(assetDir, "texscroll.inc.c")

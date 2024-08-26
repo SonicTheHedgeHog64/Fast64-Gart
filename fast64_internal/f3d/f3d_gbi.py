@@ -4026,6 +4026,28 @@ class SPLightColor(GbiMacro):
         header = "gsSPLightColor(" if static else "gSPLightColor(glistp++, "
         return header + f"{self.n}, 0x" + format(self.color_to_int(), "08X") + ")"
 
+# sm64EnumPlayerParts = [
+    # ("None", "None", "None"),
+    # ("0", "Pants (Overalls) (0x00)", "Overalls"),
+    # ("1", "Shirt (0x01)", "Shirt"),
+    # ("2", "Gloves (0x02)", "Gloves"),
+    # ("3", "Shoes (0x03)", "Shoes"),
+    # ("4", "Hair (0x04)", "Hair"),
+    # ("5", "Skin (0x05)", "Skin"),
+    # ("6", "Cap (0x06)", "Cap"),
+    # ("7", "Emblem (0x07)", "Emblem"),
+# ]
+
+SPCopyLightsPlayerPartALLConsts = {
+    0: "PANTS",
+    1: "SHIRT",
+    2: "GLOVES",
+    3: "SHOES",
+    4: "HAIR",
+    5: "SKIN",
+    6: "CAP",
+    7: "EMBLEM"
+}
 
 @dataclass(unsafe_hash=True)
 class SPSetLights(GbiMacro):
@@ -4064,14 +4086,17 @@ class SPSetLights(GbiMacro):
 
     def to_c(self, static=True):
         n = len(self.lights.l)
-        if self.lights.name == "0" or self.lights.name == "1" or self.lights.name == "2" or self.lights.name == "3" or self.lights.name == "4" or self.lights.name == "5" or self.lights.name == "6" or self.lights.name == "7"  :
+        if self.lights.name == "0" or self.lights.name == "1" or self.lights.name == "2" or self.lights.name == "3" or self.lights.name == "4" or self.lights.name == "5" or self.lights.name == "6" or self.lights.name == "7":
             header = f"gsSPCopyLightsPlayerPart(" if static else f"gSPSetLights{n}(glistp++, "
         else:
             header = f"gsSPSetLights{n}(" if static else f"gSPSetLights{n}(glistp++, "
         if not static and bpy.context.scene.gameEditorMode == "Homebrew":
             header += f"(*(Lights{n}*) segmented_to_virtual(&{self.lights.name}))"
         else:
-            header += self.lights.name
+            if self.lights.name == "0" or self.lights.name == "1" or self.lights.name == "2" or self.lights.name == "3" or self.lights.name == "4" or self.lights.name == "5" or self.lights.name == "6" or self.lights.name == "7":
+                header += str(SPCopyLightsPlayerPartALLConsts[int(self.lights.name)])
+            else:
+                header += self.lights.name
         return header + ")"
 
     def size(self, f3d):

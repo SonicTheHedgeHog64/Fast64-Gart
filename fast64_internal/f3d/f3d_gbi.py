@@ -4063,7 +4063,7 @@ class SPSetLights(GbiMacro):
 
     def to_c(self, static=True):
         n = len(self.lights.l)
-        if self.lights.name == "1" or self.lights.name == "2" or self.lights.name == "3" or self.lights.name == "4" or self.lights.name == "5" or self.lights.name == "6" or self.lights.name == "7"  :
+        if self.lights.name == "0" or self.lights.name == "1" or self.lights.name == "2" or self.lights.name == "3" or self.lights.name == "4" or self.lights.name == "5" or self.lights.name == "6" or self.lights.name == "7"  :
             header = f"gsSPCopyLightsPlayerPart{n}(" if static else f"gSPSetLights{n}(glistp++, "
         else:
             header = f"gsSPSetLights{n}(" if static else f"gSPSetLights{n}(glistp++, "

@@ -94,15 +94,15 @@ sm64EnumDrawLayers = [
 # Coop Player Parts
 
 sm64EnumPlayerParts = [
-    ("0", "None", "None"),
-    ("1", "Pants (Overalls) (0x00)", "Overalls"),
-    ("2", "Shirt (0x01)", "Shirt"),
-    ("3", "Gloves (0x02)", "Gloves"),
-    ("4", "Shoes (0x03)", "Shoes"),
-    ("5", "Hair (0x04)", "Hair"),
-    ("6", "Skin (0x05)", "Skin"),
-    ("7", "Cap (0x06)", "Cap"),
-    ("8", "Emblem (0x07)", "Emblem"),
+    ("None", "None", "None"),
+    ("0", "Pants (Overalls) (0x00)", "Overalls"),
+    ("1", "Shirt (0x01)", "Shirt"),
+    ("2", "Gloves (0x02)", "Gloves"),
+    ("3", "Shoes (0x03)", "Shoes"),
+    ("4", "Hair (0x04)", "Hair"),
+    ("5", "Skin (0x05)", "Skin"),
+    ("6", "Cap (0x06)", "Cap"),
+    ("7", "Emblem (0x07)", "Emblem"),
 ]
 
 
@@ -319,7 +319,7 @@ class DrawLayerProperty(PropertyGroup):
 #Coop
 
 class CoopPlayerPartProperty(PropertyGroup):
-    sm64: bpy.props.EnumProperty(items=sm64EnumPlayerParts, default="0", update=update_draw_layer)
+    sm64: bpy.props.EnumProperty(items=sm64EnumPlayerParts, default="None", update=update_draw_layer)
     oot: bpy.props.EnumProperty(items=ootEnumDrawLayers, default="Opaque", update=update_draw_layer)
 
     def key(self):

@@ -51,13 +51,13 @@ from .fast64_internal.render_settings import (
 
 # info about add on
 bl_info = {
-    "name": "Fast64",
+    "name": "Fast64 Gart Edition",
     "version": (2, 2, 0),
-    "author": "kurethedead",
+    "author": "kurethedead (Gart edition by ManIsCat)",
     "location": "3DView",
     "description": "Plugin for exporting F3D display lists and other game data related to Nintendo 64 games.",
     "category": "Import-Export",
-    "blender": (3, 2, 0),
+    "blender": (4, 2, 0),
 }
 
 gameEditorEnum = (

@@ -180,7 +180,7 @@ enumTextConv = [
 ]
 
 enumTextFilt = [
-    ("G_TF_POINT", "Point", "Point filtering"),
+    ("G_TF_POINT", "Nearest", "Nearest filtering (Point)"),
     ("G_TF_AVERAGE", "Average", "Four sample filter, not recommended except for pixel aligned texrects"),
     ("G_TF_BILERP", "Bilinear", "Standard N64 filtering with 3 point sample"),
 ]

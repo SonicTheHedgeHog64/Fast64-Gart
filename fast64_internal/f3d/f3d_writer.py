@@ -1332,10 +1332,15 @@ def saveOrGetF3DMaterial(material, fModel, obj, drawLayer, convertTextureData):
         if fModel.no_light_direction:
             fLights = getLightDefinitions(fModel, f3dMat)
 
+            if f3dMat.coopplayerpart.sm64 != "0":
+                fLights.name = f3dMat.coopplayerpart.sm64
+
             for i, light in enumerate(fLights.l + [fLights.a]):
                 fMaterial.mat_only_DL.commands.extend([SPLightColor(f"LIGHT_{i + 1}", light.color)])
         else:
             fLights = saveLightsDefinition(fModel, fMaterial, f3dMat, materialName + "_lights")
+            if f3dMat.coopplayerpart.sm64 != "0":
+                fLights.name = f3dMat.coopplayerpart.sm64
             fMaterial.mat_only_DL.commands.extend([SPSetLights(fLights)])
 
     fMaterial.mat_only_DL.commands.append(DPPipeSync())

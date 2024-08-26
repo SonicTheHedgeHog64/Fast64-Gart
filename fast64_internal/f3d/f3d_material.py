@@ -91,6 +91,21 @@ sm64EnumDrawLayers = [
     ("7", "Transparent Intersecting (0x07)", "Transparent Intersecting"),
 ]
 
+# Coop Player Parts
+
+sm64EnumPlayerParts = [
+    ("0", "None", "None"),
+    ("1", "Pants (Overalls) (0x00)", "Overalls"),
+    ("2", "Shirt (0x01)", "Shirt"),
+    ("3", "Gloves (0x02)", "Gloves"),
+    ("4", "Shoes (0x03)", "Shoes"),
+    ("5", "Hair (0x04)", "Hair"),
+    ("6", "Skin (0x05)", "Skin"),
+    ("7", "Cap (0x06)", "Cap"),
+    ("8", "Emblem (0x07)", "Emblem"),
+]
+
+
 ootEnumDrawLayers = [
     ("Opaque", "Opaque", "Opaque"),
     ("Transparent", "Transparent", "Transparent"),
@@ -296,6 +311,15 @@ def update_blend_method(material: Material, context):
 
 class DrawLayerProperty(PropertyGroup):
     sm64: bpy.props.EnumProperty(items=sm64EnumDrawLayers, default="1", update=update_draw_layer)
+    oot: bpy.props.EnumProperty(items=ootEnumDrawLayers, default="Opaque", update=update_draw_layer)
+
+    def key(self):
+        return (self.sm64, self.oot)
+    
+#Coop
+
+class CoopPlayerPartProperty(PropertyGroup):
+    sm64: bpy.props.EnumProperty(items=sm64EnumPlayerParts, default="0", update=update_draw_layer)
     oot: bpy.props.EnumProperty(items=ootEnumDrawLayers, default="Opaque", update=update_draw_layer)
 
     def key(self):
@@ -735,6 +759,11 @@ class F3DPanel(Panel):
 
             if f3d_mat.use_default_lighting:
                 lightSettings.prop(f3d_mat, "default_light_color", text="Light Color")
+
+                # Player part for coop
+                prop_split(layout, f3d_mat.coopplayerpart, "sm64", "Coop Player Part")
+                # end
+
                 light_controls.prop(f3d_mat, "set_ambient_from_light", text="Automatic Ambient Color")
                 ambCol = lightSettings.column()
                 ambCol.enabled = not f3d_mat.set_ambient_from_light
@@ -4461,6 +4490,9 @@ class F3DMaterialProperty(PropertyGroup):
     use_cel_shading: bpy.props.BoolProperty(name="Use Cel Shading", update=update_cel_cutout_source)
     cel_shading: bpy.props.PointerProperty(type=CelShadingProperty)
 
+    #Coop
+    coopplayerpart: bpy.props.PointerProperty(type=CoopPlayerPartProperty)
+
     def key(self) -> F3DMaterialHash:
         useDefaultLighting = self.set_lights and self.use_default_lighting
         return (
@@ -4473,6 +4505,7 @@ class F3DMaterialProperty(PropertyGroup):
             self.tex1.key(),
             self.rdp_settings.key(),
             self.draw_layer.key(),
+            self.coopplayerpart.key(),
             self.use_large_textures,
             self.use_cel_shading,
             self.cel_shading.tintPipeline if self.use_cel_shading else None,
@@ -4696,6 +4729,7 @@ mat_classes = (
     UnlinkF3DImage0,
     UnlinkF3DImage1,
     DrawLayerProperty,
+    CoopPlayerPartProperty,
     ApplyMaterialPresetOperator,
     MATERIAL_MT_f3d_presets,
     AddPresetF3D,

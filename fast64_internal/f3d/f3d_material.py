@@ -195,6 +195,11 @@ def update_draw_layer(self, context):
         set_output_node_groups(material)
 
 
+def update_coop_player_part(self, context):
+    with F3DMaterial_UpdateLock(get_material_from_context(context)) as material:
+        if not material:
+            return
+
 def rendermode_preset_to_advanced(material: bpy.types.Material):
     """
     Set all individual controls for the rendermode from the preset rendermode.
@@ -319,7 +324,7 @@ class DrawLayerProperty(PropertyGroup):
 #Coop
 
 class CoopPlayerPartProperty(PropertyGroup):
-    sm64: bpy.props.EnumProperty(items=sm64EnumPlayerParts, default="None", update=update_draw_layer)
+    sm64: bpy.props.EnumProperty(items=sm64EnumPlayerParts, default="None", update=update_coop_player_part)
     oot: bpy.props.EnumProperty(items=ootEnumDrawLayers, default="Opaque", update=update_draw_layer)
 
     def key(self):

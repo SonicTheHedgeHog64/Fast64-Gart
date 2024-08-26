@@ -3193,8 +3193,8 @@ class Lights:
 
     def to_c(self):
         data = CData()
-        if self.name != "0" or self.name != "1" or self.name != "2" or self.name != "3" or self.name != "4" or self.name != "5" or self.name != "6" or self.name != "7"  :
-            data.header = f"extern Lights{str(len(self.l))} {self.name};\n"
+        data.header = f"extern Lights{str(len(self.l))} {self.name};\n"
+        if self.name != "0" and self.name != "1" and self.name != "2" and self.name != "3" and self.name != "4" and self.name != "5" and self.name != "6" and self.name != "7":
             data.source = f"Lights{str(len(self.l))} {self.name} = gdSPDefLights{str(len(self.l))}(\n"
             data.source += "\t" + self.a.to_c()
             for light in self.l:

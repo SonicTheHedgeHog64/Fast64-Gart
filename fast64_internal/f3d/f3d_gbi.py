@@ -3193,12 +3193,13 @@ class Lights:
 
     def to_c(self):
         data = CData()
-        data.header = f"extern Lights{str(len(self.l))} {self.name};\n"
-        data.source = f"Lights{str(len(self.l))} {self.name} = gdSPDefLights{str(len(self.l))}(\n"
-        data.source += "\t" + self.a.to_c()
-        for light in self.l:
-            data.source += ",\n\t" + light.to_c()
-        data.source += ");\n\n"
+        if self.name != "0" or self.name != "1" or self.name != "2" or self.name != "3" or self.name != "4" or self.name != "5" or self.name != "6" or self.name != "7"  :
+            data.header = f"extern Lights{str(len(self.l))} {self.name};\n"
+            data.source = f"Lights{str(len(self.l))} {self.name} = gdSPDefLights{str(len(self.l))}(\n"
+            data.source += "\t" + self.a.to_c()
+            for light in self.l:
+                data.source += ",\n\t" + light.to_c()
+                data.source += ");\n\n"
         return data
 
 
@@ -4064,7 +4065,7 @@ class SPSetLights(GbiMacro):
     def to_c(self, static=True):
         n = len(self.lights.l)
         if self.lights.name == "0" or self.lights.name == "1" or self.lights.name == "2" or self.lights.name == "3" or self.lights.name == "4" or self.lights.name == "5" or self.lights.name == "6" or self.lights.name == "7"  :
-            header = f"gsSPCopyLightsPlayerPart{n}(" if static else f"gSPSetLights{n}(glistp++, "
+            header = f"gsSPCopyLightsPlayerPart(" if static else f"gSPSetLights{n}(glistp++, "
         else:
             header = f"gsSPSetLights{n}(" if static else f"gSPSetLights{n}(glistp++, "
         if not static and bpy.context.scene.gameEditorMode == "Homebrew":

@@ -57,7 +57,7 @@ bl_info = {
     "location": "3DView",
     "description": "Plugin for exporting F3D display lists and other game data related to Nintendo 64 games.",
     "category": "Import-Export",
-    "blender": (4, 2, 0),
+    "blender": (3, 6, 0),
 }
 
 gameEditorEnum = (

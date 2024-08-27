@@ -2534,7 +2534,7 @@ def createF3DMat(obj: Object | None, preset="Shaded Solid", index=None):
     mat = bpy.data.materials["fast64_f3d_material_library_beefwashere"]
     # duplicate and rename the linked material
     material = mat.copy()
-    material.name = "f3dlite_material"
+    material.name = "Fast3D Material"
     # remove the linked material so it doesn't bother anyone or get meddled with
     bpy.data.materials.remove(mat)
 

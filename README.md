@@ -13,7 +13,7 @@ Yes you dont have to manually add them anymore. you set Player Parts for materia
  
 You'll have to Add that geo_mario_set_player_colors GEO_ASM bone in blender so you only have to export the model and not edit anything; The Mario.blend in this repository already has that bone set up for you.
 
-# SMLUA Anim Exporter
+# SMLUA Anim Exporter (WIP)
 
 Theres a New option called "SMLUA Animation" in the Animation Exporter:
 ![image](https://github.com/user-attachments/assets/7788c9bb-46bc-42ec-8cda-1ec100686161)

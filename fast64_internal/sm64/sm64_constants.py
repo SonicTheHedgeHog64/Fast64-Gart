@@ -2007,3 +2007,7 @@ marioAnimations = [
     (5737600, "207 - Forwards spinning flip"),
     (5740584, "208 - Triple jump fly"),
 ]
+
+AllSm64Anims = {
+    0xC2: (0x0800401C, "Amp 0"),
+}

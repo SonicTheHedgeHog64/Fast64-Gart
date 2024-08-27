@@ -44,6 +44,7 @@ from .sm64_constants import (
     level_enums,
     enumLevelNames,
     marioAnimations,
+    AllSm64Anims,
 )
 
 from .sm64_utility import export_rom_checks, import_rom_checks
@@ -1002,6 +1003,40 @@ class SM64_ImportAllMarioAnims(bpy.types.Operator):
             return {"CANCELLED"}  # must return a set
 
         return {"FINISHED"}  # must return a set
+    
+class SM64_ImportAnimsFromModelID(bpy.types.Operator):
+    bl_idname = "object.sm64_import_anims_from_model"
+    bl_label = "Import Animations From ModelID"
+    bl_options = {"REGISTER", "UNDO", "PRESET"}
+
+    # Called on demand (i.e. button press, menu item)
+    # Can also be called from operator search menu (Spacebar)
+    def execute(self, context):
+        romfileSrc = None
+        try:
+            import_rom_checks(bpy.path.abspath(context.scene.fast64.sm64.import_rom))
+            romfileSrc = open(bpy.path.abspath(context.scene.fast64.sm64.import_rom), "rb")
+        except Exception as e:
+            raisePluginError(self, e)
+            return {"CANCELLED"}
+        try:
+            if len(context.selected_objects) == 0:
+                raise PluginError("Armature not selected.")
+            armatureObj = context.active_object
+            if armatureObj.type != "ARMATURE":
+                raise PluginError("Armature not selected.")
+
+            # importAnimationToBlender(romfileSrc, AllSm64Anims[int(context.scene.animFromModel_ID)], armatureObj, {}, context.scene.isDMAImport, "SM64 ANIM")
+
+            romfileSrc.close()
+            self.report({"INFO"}, "Success!")
+        except Exception as e:
+            if romfileSrc is not None:
+                romfileSrc.close()
+            raisePluginError(self, e)
+            return {"CANCELLED"}  # must return a set
+
+        return {"FINISHED"}  # must return a set
 
 
 class SM64_ImportAnimPanel(SM64_Panel):
@@ -1026,16 +1061,33 @@ class SM64_ImportAnimPanel(SM64_Panel):
         col.prop(context.scene, "animIsSegPtr")
         col.prop(context.scene, "levelAnimImport")
 
+class SM64_ImportAnimFromModelPanel(SM64_Panel):
+    bl_idname = "SM64_PT_import_anims_from_model"
+    bl_label = "SM64 Animation From Model Importer"
+    goal = "Object/Actor/Anim"
+    import_panel = True
+
+    # called every frame
+    def draw(self, context):
+        col = self.layout.column()
+        col.operator(SM64_ImportAnimsFromModelID.bl_idname)
+
+        prop_split(col, context.scene, "animFromModel_ID", "Model ID")
+       # col.prop(context.scene, "animIsSegPtr")
+       # col.prop(context.scene, "levelAnimImport")
+
 
 sm64_anim_classes = (
     SM64_ExportAnimMario,
     SM64_ImportAnimMario,
     SM64_ImportAllMarioAnims,
+    SM64_ImportAnimsFromModelID,
 )
 
 sm64_anim_panels = (
     SM64_ImportAnimPanel,
     SM64_ExportAnimPanel,
+    SM64_ImportAnimFromModelPanel,
 )
 
 
@@ -1054,6 +1106,9 @@ def sm64_anim_register():
         register_class(cls)
 
     bpy.types.Scene.animStartImport = bpy.props.StringProperty(name="Import Start", default="4EC690")
+    #Coop
+    bpy.types.Scene.animFromModel_ID = bpy.props.StringProperty(name="Model ID", default="1")
+    #end
     bpy.types.Scene.animExportStart = bpy.props.StringProperty(name="Start", default="11D8930")
     bpy.types.Scene.animExportEnd = bpy.props.StringProperty(name="End", default="11FFF00")
     bpy.types.Scene.isDMAImport = bpy.props.BoolProperty(name="Is DMA Animation", default=True)
@@ -1090,6 +1145,9 @@ def sm64_anim_unregister():
         unregister_class(cls)
 
     del bpy.types.Scene.animStartImport
+    #Coop
+    del bpy.types.Scene.animFromModel_ID
+    #end
     del bpy.types.Scene.animExportStart
     del bpy.types.Scene.animExportEnd
     del bpy.types.Scene.levelAnimImport

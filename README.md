@@ -12,4 +12,4 @@ This Fast64 mod allows you to set Player Parts for materials in blender, Yes you
 Example image:
 ![image](https://github.com/user-attachments/assets/7df8d560-8bb0-4850-b9c1-05ba70a58ba8)
  
-You'll have to Add that geo_mario_set_player_colors GEO_ASM bone in blender so you only have to export the model and not edit anything. 
+You'll have to Add that geo_mario_set_player_colors GEO_ASM bone in blender so you only have to export the model and not edit anything; The Mario.blend in this repository already has that bone set up for you.

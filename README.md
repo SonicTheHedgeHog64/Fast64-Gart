@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/dea09610-48d2-4893-b8e8-b509bce3f161)# Fast64 Gart Edition
+# Fast64 Gart Edition
 
 Modification of Fast64, Supports Blender 3.6 to 4.2.
 

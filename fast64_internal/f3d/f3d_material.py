@@ -2948,6 +2948,8 @@ def ui_image(
         prop_split(prop_input, textureProp, "tex_format", name="Format")
         if textureProp.tex_format[:2] == "CI":
             prop_split(prop_input, textureProp, "ci_format", name="CI Format")
+            msg = prop_input.box().column()
+            msg.label(text="CI Textures break Coop Player models. (They don't break Levels)", icon="INFO")
 
         if not isLarge:
             if width > 0 and height > 0:
@@ -4802,7 +4804,7 @@ def mat_register():
     Scene.f3d_type = bpy.props.EnumProperty(
         name="F3D Microcode",
         items=enumF3D,
-        default="F3D",
+        default="F3DEX2/LX2",
     )
 
     # RDP Defaults

@@ -1138,7 +1138,7 @@ sm64_anim_classes = (
 sm64_anim_panels = (
     SM64_ImportAnimPanel,
     SM64_ExportAnimPanel,
-    SM64_ImportAnimFromModelPanel,
+    # SM64_ImportAnimFromModelPanel, vro sorry
 )
 
 

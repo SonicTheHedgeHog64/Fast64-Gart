@@ -15,7 +15,7 @@ You'll have to Add that geo_mario_set_player_colors GEO_ASM bone in blender so y
 
 # SMLUA Anim Exporter (WIP)
 
-Theres a New option called "SMLUA Animation" in the Animation Exporter:
+There's a New option called "SMLUA Animation" in the Animation Exporter:
 ![image](https://github.com/user-attachments/assets/7788c9bb-46bc-42ec-8cda-1ec100686161)
 
 It allows you to export the anims as lua files in your Custom Export Path Folder:

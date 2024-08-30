@@ -1271,6 +1271,7 @@ class F3DPanel(Panel):
         layout = self.layout
 
         layout.operator(CreateFast3DMaterial.bl_idname)
+        layout.operator(CreateFast3DMetalMaterial.bl_idname)
         material = context.material
         if material is None:
             return
@@ -2661,6 +2662,21 @@ class CreateFast3DMaterial(Operator):
             preset = getDefaultMaterialPreset("Shaded Solid")
             createF3DMat(obj, preset)
             self.report({"INFO"}, "Created new Fast3D material.")
+        return {"FINISHED"}
+    
+# Coop
+class CreateFast3DMetalMaterial(Operator):
+    bl_idname = "object.create_f3d_metal_mat"
+    bl_label = "Create Metal Material"
+    bl_options = {"REGISTER", "UNDO", "PRESET"}
+
+    def execute(self, context):
+        obj = bpy.context.view_layer.objects.active
+        if obj is None:
+            self.report({"ERROR"}, "No active object selected.")
+        else:
+            materal = createF3DMat(obj, "sm64_metal_texture")
+            self.report({"INFO"}, "Created new Metal material.")
         return {"FINISHED"}
 
 
@@ -4742,6 +4758,9 @@ mat_classes = (
     AddPresetF3D,
     F3DPanel,
     CreateFast3DMaterial,
+    #coop
+    CreateFast3DMetalMaterial,
+    #end
     RecreateF3DNodes,
     TextureFieldProperty,
     SetTileSizeScrollProperty,

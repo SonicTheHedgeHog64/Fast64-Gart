@@ -29,10 +29,10 @@ A new option under the Create Fast3D material option is added:
 If you click it, It will generate a Fast3D Material With these properties:
 ![image](https://github.com/user-attachments/assets/1c7d1d25-0035-4b8a-ba12-8be4175810af)
 
-For Texture 0, select the custom_mario_metal_shade.png from the repo's coop-metal-textures folder.
-For Texture 1, select the custom_mario_metal_light.png from the repo's coop-metal-textures folder.
-
 Or you can make a material and set the Preset to Sm64 Metal Texture:
 ![image](https://github.com/user-attachments/assets/575eb393-df11-4bbc-ab27-bf10db7a9eab)
+
+For Texture 0, select the custom_mario_metal_shade.png from the repo's coop-metal-textures folder.
+For Texture 1, select the custom_mario_metal_light.png from the repo's coop-metal-textures folder.
 
 (This Preset was made by FluffaMario)

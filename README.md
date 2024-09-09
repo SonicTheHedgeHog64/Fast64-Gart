@@ -23,6 +23,7 @@ Blender default light with custom ambient:
 
 
 In SM64 With Light recolored but Ambient kept:
+
 ![Screenshot 2024-09-10 005336](https://github.com/user-attachments/assets/ec5c5cd7-b779-4157-a1bb-afa80e01bcc9)
 
 # SMLUA Anim Exporter (WIP)

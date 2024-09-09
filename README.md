@@ -26,6 +26,8 @@ In SM64 With Light recolored but Ambient kept:
 
 ![Screenshot 2024-09-10 005336](https://github.com/user-attachments/assets/ec5c5cd7-b779-4157-a1bb-afa80e01bcc9)
 
+Thanks to SwagSkeleton95 for letting me use the model By the way!!!
+
 # SMLUA Anim Exporter (WIP)
 
 There's a New option called "SMLUA Animation" in the Animation Exporter:

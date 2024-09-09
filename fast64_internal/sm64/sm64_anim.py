@@ -227,7 +227,10 @@ def extract_hex(input_string) -> str:
 def exportAnimationC(armatureObj, loopAnim, dirPath, dirName, groupName, customExport, headerType, levelName):
     dirPath, texDir = getExportDir(customExport, dirPath, headerType, levelName, "", dirName)
 
-    sm64_anim = exportAnimationCommon(armatureObj, loopAnim, dirName + "_anim")
+    if bpy.context.scene.smluaAnimation:
+        sm64_anim = exportAnimationCommon(armatureObj, loopAnim, dirName)
+    else:
+        sm64_anim = exportAnimationCommon(armatureObj, loopAnim, dirName + "_anim")
     animName = armatureObj.animation_data.action.name
 
     
@@ -244,7 +247,7 @@ def exportAnimationC(armatureObj, loopAnim, dirPath, dirName, groupName, customE
 
     animsName = dirName + "_anims"
     if bpy.context.scene.smluaAnimation:
-        animFileName = "anim_" + toAlnum(animName) + ".lua"
+        animFileName = dirName + ".lua"
         animPath = os.path.join(dirPath, animFileName)
     else:
         animFileName = "anim_" + toAlnum(animName) + ".inc.c"
@@ -267,7 +270,7 @@ def exportAnimationC(armatureObj, loopAnim, dirPath, dirName, groupName, customE
            # + "\t"
            # + str(int(round(self.frameInterval[1] - 1)))
         beforeIndiciandValue = str(data.header.repetitions) +  ", " + str(data.header.marioYOffset) + ", " "0" +  ", " + str(int(round(data.header.frameInterval[0]))) +  ", " + str(int(round(data.header.frameInterval[1] - 1))) +  ", "
-        outFile.write((f"smlua_anim_util_register_animation('{data.name}'" + ",") + beforeIndiciandValue + "{" +  data.values.to_c().replace(");", "").replace("smlua_anim_util_register_animation(" + data.name + "_values,", "") + "}," + "{" + data.indices.to_c().replace(data.name + "_indices", "").replace("smlua_anim_util_register_animation", "").replace("(,", "").replace(");", "") + "}" + ");")
+        outFile.write((f"smlua_anim_util_register_animation('{dirName}'" + ",") + beforeIndiciandValue + "{" +  data.values.to_c().replace(");", "").replace("smlua_anim_util_register_animation(" + data.name + "_values,", "") + "}," + "{" + data.indices.to_c().replace(data.name + "_indices", "").replace("smlua_anim_util_register_animation", "").replace("(,", "").replace(");", "") + "}" + ");")
     else:
         data = sm64_anim.to_c()
         outFile = open(animPath, "w", newline="\n")

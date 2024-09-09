@@ -3147,6 +3147,8 @@ class Lights:
         self.startAddress = 0
         self.a = None
         self.l = []
+        self.coopplayerpartName = "None"
+        self.keepambientrecolor = False
 
     def set_addr(self, startAddress):
         startAddress = get64bitAlignedAddr(startAddress)
@@ -3193,13 +3195,12 @@ class Lights:
 
     def to_c(self):
         data = CData()
-        if self.name != "0" and self.name != "1" and self.name != "2" and self.name != "3" and self.name != "4" and self.name != "5" and self.name != "6" and self.name != "7":
-            data.header = f"extern Lights{str(len(self.l))} {self.name};\n"
-            data.source = f"Lights{str(len(self.l))} {self.name} = gdSPDefLights{str(len(self.l))}(\n"
-            data.source += "\t" + self.a.to_c()
-            for light in self.l:
-                data.source += ",\n\t" + light.to_c()
-                data.source += ");\n\n"
+        data.header = f"extern Lights{str(len(self.l))} {self.name};\n"
+        data.source = f"Lights{str(len(self.l))} {self.name} = gdSPDefLights{str(len(self.l))}(\n"
+        data.source += "\t" + self.a.to_c()
+        for light in self.l:
+            data.source += ",\n\t" + light.to_c()
+            data.source += ");\n\n"
         return data
 
 
@@ -4049,6 +4050,17 @@ SPCopyLightsPlayerPartALLConsts = {
     7: "EMBLEM"
 }
 
+SPCopyLightEXTALLConts = {
+    0: 3,
+    1: 5,
+    2: 7,
+    3: 9,
+    4: 11,
+    5: 13,
+    6: 15,
+    7: 17
+}
+
 @dataclass(unsafe_hash=True)
 class SPSetLights(GbiMacro):
     lights: Lights
@@ -4086,17 +4098,22 @@ class SPSetLights(GbiMacro):
 
     def to_c(self, static=True):
         n = len(self.lights.l)
-        if self.lights.name == "0" or self.lights.name == "1" or self.lights.name == "2" or self.lights.name == "3" or self.lights.name == "4" or self.lights.name == "5" or self.lights.name == "6" or self.lights.name == "7":
+        if self.lights.coopplayerpartName != "None" and not self.lights.keepambientrecolor:
             header = f"gsSPCopyLightsPlayerPart(" if static else f"gSPSetLights{n}(glistp++, "
         else:
             header = f"gsSPSetLights{n}(" if static else f"gSPSetLights{n}(glistp++, "
         if not static and bpy.context.scene.gameEditorMode == "Homebrew":
             header += f"(*(Lights{n}*) segmented_to_virtual(&{self.lights.name}))"
         else:
-            if self.lights.name == "0" or self.lights.name == "1" or self.lights.name == "2" or self.lights.name == "3" or self.lights.name == "4" or self.lights.name == "5" or self.lights.name == "6" or self.lights.name == "7":
-                header += str(SPCopyLightsPlayerPartALLConsts[int(self.lights.name)])
+            if self.lights.coopplayerpartName != "None":
+                header += str(SPCopyLightsPlayerPartALLConsts[int(self.lights.coopplayerpartName)])
             else:
                 header += self.lights.name
+
+        if self.lights.coopplayerpartName != "None" and self.lights.keepambientrecolor:
+            header = f"gsSPLight(&{self.lights.name}.l, 1),\n    gsSPLight(&{self.lights.name}.a, 2),\n    gsSPCopyLightEXT(1, {str(int(SPCopyLightEXTALLConts[int(self.lights.coopplayerpartName)]))}"
+        if not static and bpy.context.scene.gameEditorMode == "Homebrew":
+            header += f"(*(Lights{n}*) segmented_to_virtual(&{self.lights.name}))"
         return header + ")"
 
     def size(self, f3d):

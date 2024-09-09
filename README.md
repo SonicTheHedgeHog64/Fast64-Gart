@@ -21,6 +21,7 @@ This Options makes it so the Material's Lights gets recolored but not the Ambien
 Blender default light with custom ambient:
 ![Screenshot 2024-09-10 005409](https://github.com/user-attachments/assets/2bec3301-bad5-419a-ae86-d7eaceda76b4)
 
+
 in SM64 With Light recolored but Ambient kept:
 ![Screenshot 2024-09-10 005336](https://github.com/user-attachments/assets/ec5c5cd7-b779-4157-a1bb-afa80e01bcc9)
 

@@ -6430,8 +6430,9 @@ f3d_mat.k4 = 0.4470588266849518
 f3d_mat.k5 = 0.16470588743686676
 f3d_mat.prim_lod_frac = 0.0
 f3d_mat.prim_lod_min = 0.0
-f3d_mat.default_light_color = (1.0, 1.0, 1.0, 1.0)
-f3d_mat.ambient_light_color = (0.5, 0.5, 0.5, 1.0)
+f3d_mat.default_light_color = (0.0, 0.0, 0.0, 1.0)
+f3d_mat.set_ambient_from_light = False
+f3d_mat.ambient_light_color = (1.0, 1.0, 1.0, 1.0)
 f3d_mat.f3d_light1 = None
 f3d_mat.f3d_light2 = None
 f3d_mat.f3d_light3 = None
@@ -6528,6 +6529,8 @@ f3d_mat.cel_shading.levels.clear()
 f3d_mat.coopplayerpart.name = ''
 f3d_mat.coopplayerpart.sm64 = '6'
 f3d_mat.coopplayerpart.oot = 'Opaque'
+f3d_mat.coopkeepambient = True
+f3d_mat.coopkeeplight = False
 bpy.context.material.f3d_update_flag = False
 f3d_mat.use_default_lighting = f3d_mat.use_default_lighting # Force nodes update
 """

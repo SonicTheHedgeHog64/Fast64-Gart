@@ -13,10 +13,11 @@ Yes you don't have to manually add them anymore. you set Player Parts for materi
  
 You'll have to Add that geo_mario_set_player_colors GEO_ASM bone in blender so you only have to export the model and not edit anything; The Mario.blend in this repository already has that bone set up for you.
 
-# Keep Ambient + Recolor
+# Use Ambient for Recolor
 
 This Options makes it so the Material's Lights gets recolored but not the Ambient. You can make it do some cool Effects!
-![image](https://github.com/user-attachments/assets/3a83f7d1-115e-4836-bc09-d2208c60e633)
+![image](https://github.com/user-attachments/assets/bfbc3315-f37d-45fd-8fb2-e00f6a8b83ed)
+
 
 Blender default light with custom ambient:
 ![Screenshot 2024-09-10 005409](https://github.com/user-attachments/assets/2bec3301-bad5-419a-ae86-d7eaceda76b4)

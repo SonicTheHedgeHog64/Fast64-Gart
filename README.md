@@ -41,7 +41,7 @@ Blender default light with custom Light:
 ![image](https://github.com/user-attachments/assets/52f26fd9-b22b-468b-ace9-f75b4f7198f8)
 
 
-In SM64 With Light recolored but Light kept:
+In SM64 With Ambient recolored but Light kept:
 
 ![image](https://github.com/user-attachments/assets/379b3f56-7b06-40c5-8a1c-27f7291afc2a)
 

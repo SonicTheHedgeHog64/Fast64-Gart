@@ -13,10 +13,11 @@ Yes you don't have to manually add them anymore. you set Player Parts for materi
  
 You'll have to Add that geo_mario_set_player_colors GEO_ASM bone in blender so you only have to export the model and not edit anything; The Mario.blend in this repository already has that bone set up for you.
 
-# Keep Ambient + Recolor
+# Use Light for Recolor Only
 
 This Options makes it so the Material's Lights gets recolored but not the Ambient. You can make it do some cool Effects!
-![image](https://github.com/user-attachments/assets/3a83f7d1-115e-4836-bc09-d2208c60e633)
+![image](https://github.com/user-attachments/assets/d26f2f34-81e7-4a5f-a99d-1e423c305455)
+
 
 Blender default light with custom ambient:
 ![Screenshot 2024-09-10 005409](https://github.com/user-attachments/assets/2bec3301-bad5-419a-ae86-d7eaceda76b4)
@@ -25,6 +26,26 @@ Blender default light with custom ambient:
 In SM64 With Light recolored but Ambient kept:
 
 ![Screenshot 2024-09-10 005336](https://github.com/user-attachments/assets/ec5c5cd7-b779-4157-a1bb-afa80e01bcc9)
+
+Thanks to SwagSkeleton95 for letting me use the model By the way!!!
+
+# Use Ambient for Recolor Only
+
+This Options makes it so the Material's Ambient gets recolored but not the Light. You can make it do some cool Effects!
+![image](https://github.com/user-attachments/assets/1ad088bc-d579-497f-9884-efbb6b2567ad)
+
+
+Blender default light with custom Light:
+
+
+![image](https://github.com/user-attachments/assets/52f26fd9-b22b-468b-ace9-f75b4f7198f8)
+
+
+In SM64 With Ambient recolored but Light kept:
+
+![image](https://github.com/user-attachments/assets/379b3f56-7b06-40c5-8a1c-27f7291afc2a)
+
+Thanks to SwagSkeleton95 for letting me use the model in both examples By the way!!!
 
 # SMLUA Anim Exporter (WIP)
 

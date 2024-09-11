@@ -47,6 +47,8 @@ In SM64 With Ambient recolored but Light kept:
 
 Thanks to SwagSkeleton95 for letting me use the model in both examples By the way!!!
 
+Selecting both Use Light and Use Ambient will result in a shaded and fully recolorable material.
+
 # SMLUA Anim Exporter (WIP)
 
 There's a New option called "SMLUA Animation" in the Animation Exporter:

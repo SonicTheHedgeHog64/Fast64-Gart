@@ -768,8 +768,8 @@ class F3DPanel(Panel):
                 # Player part for coop
                 prop_split(layout, f3d_mat.coopplayerpart, "sm64", "Coop Player Part")
                 if f3d_mat.coopplayerpart.sm64 != "None":
-                    light_controls.prop(f3d_mat, "coopkeepambient", text="Use Light for Recolor only", invert_checkbox=True)
-                    light_controls.prop(f3d_mat, "coopkeeplight", text="Use Ambient for Recolor only", invert_checkbox=True)
+                    light_controls.prop(f3d_mat, "coopkeepambient", text="Use Light for Recolorability", invert_checkbox=True)
+                    light_controls.prop(f3d_mat, "coopkeeplight", text="Use Ambient for Recolorability", invert_checkbox=True)
                 # end
 
                 light_controls.prop(f3d_mat, "set_ambient_from_light", text="Automatic Ambient Color")

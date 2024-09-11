@@ -274,7 +274,6 @@ class SM64_Object:
         self.name = name  # to sort by when exporting
 
     def to_c(self):
-        if str(self.behaviour) != "RM_Scroll_Texture":
             if self.acts == 0x1F:
                 return (
                     "OBJECT("
@@ -321,34 +320,6 @@ class SM64_Object:
                     + str(self.acts)
                     + ")"
                 )
-        else: 
-            texcrollLUA = os.path.join(bpy.path.abspath(bpy.context.scene.fast64.sm64.decomp_path), "texscroll.lua")
-            texcrollLUAFILE = open(texcrollLUA, "a", newline="\n")
-            texcrollLUAFILE.truncate(0)
-            texcrollLUAFILE.writelines(f'add_scroll_target({str(self.bparam)}, "VtxName")\n')
-            texcrollLUAFILE.close()
-            return (
-                    "OBJECT("
-                    + str(self.model)
-                    + ", "
-                    + str(int(round(self.position[0])))
-                    + ", "
-                    + str(int(round(self.position[1])))
-                    + ", "
-                    + str(int(round(self.position[2])))
-                    + ", "
-                    + str(int(round(math.degrees(self.rotation[0]))))
-                    + ", "
-                    + str(int(round(math.degrees(self.rotation[1]))))
-                    + ", "
-                    + str(int(round(math.degrees(self.rotation[2]))))
-                    + ", "
-                    + str(self.bparam)
-                    + ", "
-                    + str(self.behaviour)
-                    + ")"
-                )
-
 
 
 class SM64_Whirpool:

@@ -4113,6 +4113,8 @@ class SPSetLights(GbiMacro):
 
         # Customs
 
+        # these ifs are switched for some reason: not = true, true = not
+
         if self.lights.coopplayerpartName != "None" and not self.lights.keepambientrecolor and self.lights.keeplightcolor:
             header = f"gsSPLight(&{self.lights.name}.l, 1),\n    gsSPLight(&{self.lights.name}.a, 2),\n    gsSPCopyLightEXT(1, {str(int(SPCopyLightEXTALLConts[int(self.lights.coopplayerpartName)]))}"
         if not static and bpy.context.scene.gameEditorMode == "Homebrew":

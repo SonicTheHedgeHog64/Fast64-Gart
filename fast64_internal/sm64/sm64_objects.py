@@ -838,7 +838,7 @@ def process_sm64_objects(obj, area, rootMatrix, transformMatrix, specialsOnly):
                     SM64_Whirpool(obj.whirlpool_index, obj.whirpool_condition, obj.whirpool_strength, translation)
                 )
             elif obj.sm64_obj_type == "Camera Volume":
-                checkIdentityRotation(obj, rotation, True)
+                checkIdentityRotation(obj, rotation.to_quaternion(), True)
                 if obj.cameraVolumeGlobal:
                     triggerIndex = -1
                 else:

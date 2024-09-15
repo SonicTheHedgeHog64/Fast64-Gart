@@ -36,6 +36,7 @@ enumBoneType = [
     ("DisplayListWithOffset", "Animated Part (0x13)", "Animated Part (Animatable Bone)"),
     ("CustomAnimated", "Custom Animated", "Custom Bone used for animation"),
     ("CustomNonAnimated", "Custom (Non-animated)", "Custom geolayout bone, non animated"),
+    ("RecolorCommands", "Recolor Commands", "Adds all of those GEO_ASM's for the model's recolorability")
 ]
 
 animatableBoneTypes = {"DisplayListWithOffset", "CustomAnimated"}

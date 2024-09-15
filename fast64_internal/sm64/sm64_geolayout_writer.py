@@ -116,6 +116,7 @@ from .sm64_geolayout_classes import (
     RotateNode,
     TranslateRotateNode,
     FunctionNode,
+    CoopRecolorCommands,
     CustomNode,
     BillboardNode,
     ScaleNode,
@@ -1700,6 +1701,8 @@ def processBone(
         if bone.geo_func == "":
             raise PluginError("Function bone " + boneName + " function value is empty.")
         node = FunctionNode(bone.geo_func, bone.func_param)
+    elif bone.geo_cmd == "RecolorCommands":
+        node = CoopRecolorCommands(bone.geo_func, bone.func_param)
     elif bone.geo_cmd == "HeldObject":
         if bone.geo_func == "":
             raise PluginError("Held object bone " + boneName + " function value is empty.")

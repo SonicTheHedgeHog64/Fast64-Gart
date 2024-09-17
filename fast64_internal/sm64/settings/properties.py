@@ -63,6 +63,9 @@ class SM64_Properties(PropertyGroup):
     )
     sm64_repo_settings_tab: BoolProperty(default=True, name="SM64 Repo Settings")
     disable_scroll: BoolProperty(name="Disable Scrolling Textures")
+    # Coop
+    fix_coop_fog: BoolProperty(name="Fix Coop Fog")
+    # end
     refresh_version: EnumProperty(items=enum_refresh_versions, name="Refresh", default="Refresh 13")
     compression_format: EnumProperty(
         items=enum_compression_formats,
@@ -138,6 +141,7 @@ class SM64_Properties(PropertyGroup):
 
         if not self.binary_export:
             col.prop(self, "disable_scroll")
+            col.prop(self, "fix_coop_fog")
             if show_repo_settings:
                 prop_split(col, self, "compression_format", "Compression Format")
                 prop_split(col, self, "refresh_version", "Refresh (Function Map)")

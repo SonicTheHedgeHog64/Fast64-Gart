@@ -916,7 +916,11 @@ def exportLevelC(obj, transformMatrix, levelName, exportDir, savePNG, customExpo
 
     modelPath = os.path.join(levelDir, "model.inc.c")
     modelFile = open(modelPath, "w", newline="\n")
-    modelFile.write(staticData.source)
+    if bpy.context.scene.fast64.sm64.fix_coop_fog:
+        fixFogWrite =  staticData.source.replace("gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, ENVIRONMENT, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED)", "gsDPSetCombineMode(G_CC_MODULATEI, G_CC_PASS2)")
+        modelFile.write(fixFogWrite)
+    else:
+        modelFile.write(staticData.source)
     modelFile.close()
 
     fModel.freePalettes()

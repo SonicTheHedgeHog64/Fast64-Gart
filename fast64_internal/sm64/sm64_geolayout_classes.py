@@ -547,10 +547,7 @@ class CoopRecolorCommands:
     def to_c(self):
         return ("GEO_ASM(" + "LAYER_OPAQUE + 3" + ", " + "geo_mario_set_player_colors" + "),\n" +
         "GEO_ASM(" + "LAYER_ALPHA + 3" + ", " + "geo_mario_set_player_colors" + "),\n" +
-        "GEO_ASM(" + "LAYER_TRANSPARENT + 3" + ", " + "geo_mario_set_player_colors" + "),\n" +
-        "GEO_ASM(" + "LAYER_OPAQUE << 2" + ", " + "geo_mario_set_player_colors" + "),\n" +
-        "GEO_ASM(" + "LAYER_ALPHA << 2" + ", " + "geo_mario_set_player_colors" + "),\n" +
-        "GEO_ASM(" + "LAYER_TRANSPARENT << 2" + ", " + "geo_mario_set_player_colors" + "),\n")
+        "GEO_ASM(" + "LAYER_TRANSPARENT + 3" + ", " + "geo_mario_set_player_colors" + "),\n")
 
 
 class HeldObjectNode:

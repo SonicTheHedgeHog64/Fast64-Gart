@@ -73,3 +73,8 @@ For Texture 0, select the custom_mario_metal_shade.png from the repo's coop-meta
 For Texture 1, select the custom_mario_metal_light.png from the repo's coop-metal-textures folder.
 
 (This Preset was made by FluffaMario)
+
+# Fix Coop Fog
+
+There's a new option under the "Disable Scrolling Textures" option, it fixes fog materials for levels automatically:
+![Screenshot 2024-09-17 174137](https://github.com/user-attachments/assets/168e7b52-1439-4612-b916-81ce4be3d854)

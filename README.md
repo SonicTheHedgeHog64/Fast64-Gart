@@ -84,3 +84,12 @@ There's a new option under the "Disable Scrolling Textures" option, it fixes fog
 There's a new option under the "Fix Coop Fog" option, it adds the revert that Coop needs to work properly (for new Metal in romhacks); this also fixes the Vanish cap not affecting some parts of the body.
 ![Screenshot 2024-09-19 102951](https://github.com/user-attachments/assets/17e04012-9500-41bb-ab96-e01c8563a11b)
 
+# Recolor Geolayout Command
+
+In this Fast64, there's a new Bone command:
+![image](https://github.com/user-attachments/assets/b65e1cb7-e8c8-432f-9aeb-3c156fa48cf9)
+
+If you enable it in a bone, it exports these that are needed for recolorability:
+![image](https://github.com/user-attachments/assets/14de313c-3878-4f64-ae30-ec82baf7df56)
+
+

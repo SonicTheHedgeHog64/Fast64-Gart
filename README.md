@@ -90,6 +90,7 @@ In this Fast64, there's a new Bone command:
 ![image](https://github.com/user-attachments/assets/b65e1cb7-e8c8-432f-9aeb-3c156fa48cf9)
 
 If you enable it in a bone, it exports these that are needed for recolorability:
-![image](https://github.com/user-attachments/assets/14de313c-3878-4f64-ae30-ec82baf7df56)
+![image](https://github.com/user-attachments/assets/d945d3ff-7b3b-4f03-bb87-89d6aa3ceb60)
+
 
 

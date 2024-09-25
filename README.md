@@ -96,6 +96,7 @@ If you enable it in a bone, it exports these that are needed for recolorability:
 
 
 There's also another one:
+
 ![image](https://github.com/user-attachments/assets/20c58098-c4da-4429-bd44-e93773672c9d)
 
 If you enable it in a bone, it will export these for mirror mario:

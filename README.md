@@ -78,3 +78,28 @@ For Texture 1, select the custom_mario_metal_light.png from the repo's coop-meta
 
 There's a new option under the "Disable Scrolling Textures" option, it fixes fog materials for levels automatically:
 ![Screenshot 2024-09-17 174137](https://github.com/user-attachments/assets/168e7b52-1439-4612-b916-81ce4be3d854)
+
+# Fix Reverts for Coop
+
+There's a new option under the "Fix Coop Fog" option, it adds the revert that Coop needs to work properly (for new Metal in romhacks); this also fixes the Vanish cap not affecting some parts of the body.
+![Screenshot 2024-09-19 102951](https://github.com/user-attachments/assets/17e04012-9500-41bb-ab96-e01c8563a11b)
+
+# Recolor Geolayout Command(s)
+
+In this Fast64, there's a new Bone command:
+![image](https://github.com/user-attachments/assets/b65e1cb7-e8c8-432f-9aeb-3c156fa48cf9)
+
+If you enable it in a bone, it exports these that are needed for recolorability:
+![image](https://github.com/user-attachments/assets/d945d3ff-7b3b-4f03-bb87-89d6aa3ceb60)
+
+
+
+
+There's also another one:
+
+![image](https://github.com/user-attachments/assets/20c58098-c4da-4429-bd44-e93773672c9d)
+
+If you enable it in a bone, it will export these for mirror mario:
+![image](https://github.com/user-attachments/assets/a90f0292-51f0-46de-b853-932fc0bd2a5b)
+
+

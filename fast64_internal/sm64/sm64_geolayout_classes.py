@@ -548,6 +548,33 @@ class CoopRecolorCommands:
         return ("GEO_ASM(" + "LAYER_OPAQUE + 3" + ", " + "geo_mario_set_player_colors" + "),\n" +
         "GEO_ASM(" + "LAYER_ALPHA + 3" + ", " + "geo_mario_set_player_colors" + "),\n" +
         "GEO_ASM(" + "LAYER_TRANSPARENT + 3" + ", " + "geo_mario_set_player_colors" + "),\n")
+    
+
+# copy paste lmfao
+class CoopMirrorCommands:
+    def __init__(self, geo_func, func_param):
+        self.geo_func = geo_func
+        self.func_param = func_param
+        self.hasDL = False
+
+    def size(self):
+        return 8
+
+    def to_binary(self, segmentData):
+        command = bytearray([GEO_CALL_ASM, 0x00])
+        func_param = int(self.func_param)
+        command.extend(func_param.to_bytes(2, "big", signed=True))
+        addFuncAddress(command, self.geo_func)
+        return command
+
+    def to_c(self):
+        return ("GEO_ASM(" + "LAYER_OPAQUE << 2" + ", " + "geo_mirror_mario_backface_culling" + "),\n" +
+        "GEO_ASM(" + "LAYER_ALPHA << 2" + ", " + "geo_mirror_mario_backface_culling" + "),\n" +
+        "GEO_ASM(" + "LAYER_TRANSPARENT << 2" + ", " + "geo_mirror_mario_backface_culling" + "),\n" +
+        #diffenert
+        "GEO_ASM(" + "(LAYER_OPAQUE << 2) | 1" + ", " + "geo_mirror_mario_backface_culling" + "),\n" +
+        "GEO_ASM(" + "(LAYER_ALPHA << 2) | 1" + ", " + "geo_mirror_mario_backface_culling" + "),\n" +
+        "GEO_ASM(" + "(LAYER_TRANSPARENT << 2) | 1" + ", " + "geo_mirror_mario_backface_culling" + "),\n")
 
 
 class HeldObjectNode:

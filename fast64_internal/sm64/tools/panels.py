@@ -4,6 +4,8 @@ from ...panels import SM64_Panel
 
 from .operators import SM64_CreateSimpleLevel, SM64_AddWaterBox, SM64_AddBoneGroups, SM64_CreateMetarig
 
+from ...utility_anim import ArmatureApplyWithMeshOperator
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -23,6 +25,7 @@ class SM64_ToolsPanel(SM64_Panel):
         col.label(text="Armature Tools", icon="ARMATURE_DATA")
         SM64_AddBoneGroups.draw_props(col)
         SM64_CreateMetarig.draw_props(col)
+        col.operator(ArmatureApplyWithMeshOperator.bl_idname)
 
         sm64_props: SM64_Properties = context.scene.fast64.sm64
         if not sm64_props.show_importing_menus:

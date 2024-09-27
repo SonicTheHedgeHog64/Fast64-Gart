@@ -25,7 +25,7 @@ class SM64_ToolsPanel(SM64_Panel):
         col.label(text="Armature Tools", icon="ARMATURE_DATA")
         SM64_AddBoneGroups.draw_props(col)
         SM64_CreateMetarig.draw_props(col)
-        col.operator(ArmatureApplyWithMeshOperator.bl_idname)
+        col.operator(ArmatureApplyWithMeshOperator.bl_idname, icon="ARMATURE_DATA")
 
         sm64_props: SM64_Properties = context.scene.fast64.sm64
         if not sm64_props.show_importing_menus:

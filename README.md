@@ -91,16 +91,3 @@ In this Fast64, there's a new Bone command:
 
 If you enable it in a bone, it exports these that are needed for recolorability:
 ![image](https://github.com/user-attachments/assets/d945d3ff-7b3b-4f03-bb87-89d6aa3ceb60)
-
-
-
-
-There's also another one:
-
-![image](https://github.com/user-attachments/assets/20c58098-c4da-4429-bd44-e93773672c9d)
-
-If you enable it in a bone, it will export these for mirror mario:
-![image](https://github.com/user-attachments/assets/a90f0292-51f0-46de-b853-932fc0bd2a5b)
-
-The mario.blend in this repository has these two commands set up for you.
-

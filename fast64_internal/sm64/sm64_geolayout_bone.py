@@ -37,7 +37,8 @@ enumBoneType = [
     ("CustomAnimated", "Custom Animated", "Custom Bone used for animation"),
     ("CustomNonAnimated", "Custom (Non-animated)", "Custom geolayout bone, non animated"),
     ("RecolorCommands", "Recolor Commands", "Adds all of those GEO_ASM's for the model's recolorability"),
-    ("CoopMirrorCommands", "Coop Mirror Mario Commands", "Adds all of those GEO_ASM's to fix the Mirror Mario Backface culling")
+    ("CoopMirrorCommands", "Coop Mirror Mario Commands 1", "Adds all of those GEO_ASM's at the start to fix the Mirror Mario Backface culling"),
+    ("CoopMirrorCommands2", "Coop Mirror Mario Commands 2", "Adds all of those GEO_ASM's at the end to fix the Mirror Mario Backface culling")
 ]
 
 animatableBoneTypes = {"DisplayListWithOffset", "CustomAnimated"}

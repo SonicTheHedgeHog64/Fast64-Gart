@@ -36,6 +36,7 @@ from .sm64_camera import (
 )
 
 from .sm64_objects import (
+    SM64_CombinedObjectProperties,
     sm64_obj_panel_register,
     sm64_obj_panel_unregister,
     sm64_obj_register,

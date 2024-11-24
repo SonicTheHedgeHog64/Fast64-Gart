@@ -389,6 +389,8 @@ def exportCollisionCommon(obj, transformMatrix, includeSpecials, includeChildren
     tempObj, allObjs = duplicateHierarchy(obj, None, True, areaIndex)
     try:
         addCollisionTriangles(tempObj, collisionDict, includeChildren, transformMatrix, areaIndex)
+        if not collisionDict:
+            raise PluginError("No collision data to export")
         cleanupDuplicatedObjects(allObjs)
         obj.select_set(True)
         bpy.context.view_layer.objects.active = obj
@@ -607,6 +609,7 @@ class SM64_ExportCollisionPanel(SM64_Panel):
     bl_idname = "SM64_PT_export_collision"
     bl_label = "SM64 Collision Exporter"
     goal = "Object/Actor/Anim"
+    binary_only = True
 
     # called every frame
     def draw(self, context):

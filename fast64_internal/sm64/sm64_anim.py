@@ -45,7 +45,7 @@ from .sm64_constants import (
     level_enums,
     enumLevelNames,
     marioAnimations,
-    AllSm64Anims,
+    #AllSm64Anims,
 )
 
 from .sm64_utility import export_rom_checks, import_rom_checks

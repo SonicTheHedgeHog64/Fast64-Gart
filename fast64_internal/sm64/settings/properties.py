@@ -6,8 +6,9 @@ from bpy.path import abspath
 from bpy.utils import register_class, unregister_class
 
 from ...render_settings import on_update_render_settings
-from ...utility import directory_path_checks, directory_ui_warnings, prop_split, upgrade_old_prop
+from ...utility import directory_path_checks, directory_ui_warnings, prop_split, set_prop_if_in_data, upgrade_old_prop
 from ..sm64_constants import defaultExtendSegment4
+from ..sm64_objects import SM64_CombinedObjectProperties
 from ..sm64_utility import export_rom_ui_warnings, import_rom_ui_warnings
 from ..tools import SM64_AddrConvProperties
 
@@ -31,12 +32,13 @@ class SM64_Properties(PropertyGroup):
     """Global SM64 Scene Properties found under scene.fast64.sm64"""
 
     version: IntProperty(name="SM64_Properties Version", default=0)
-    cur_version = 2  # version after property migration
+    cur_version = 4  # version after property migration
 
     # UI Selection
     show_importing_menus: BoolProperty(name="Show Importing Menus", default=False)
     export_type: EnumProperty(items=enum_export_type, name="Export Type", default="C")
     goal: EnumProperty(items=enum_sm64_goal_type, name="Goal", default="All")
+    combined_export: bpy.props.PointerProperty(type=SM64_CombinedObjectProperties)
 
     blender_to_sm64_scale: FloatProperty(
         name="Blender To SM64 Scale",
@@ -67,7 +69,7 @@ class SM64_Properties(PropertyGroup):
     fix_coop_fog: BoolProperty(name="Fix Coop Fog")
     add_coop_reverts: BoolProperty(name="Fix Reverts for Coop")
     # end
-    refresh_version: EnumProperty(items=enum_refresh_versions, name="Refresh", default="Refresh 13")
+    refresh_version: EnumProperty(items=enum_refresh_versions, name="Refresh", default="Refresh 16")
     compression_format: EnumProperty(
         items=enum_compression_formats,
         name="Compression",
@@ -100,6 +102,17 @@ class SM64_Properties(PropertyGroup):
             "refreshVer": "refresh_version",
             "exportType": "export_type",
         }
+        old_export_props_to_new = {
+            "custom_group_name": {"geoLevelName", "colLevelName", "animLevelName"},
+            "custom_export_path": {"geoExportPath", "colExportPath", "animExportPath"},
+            "object_name": {"geoName", "colName", "animName"},
+            "group_name": {"geoGroupName", "colGroupName", "animGroupName"},
+            "level_name": {"levelOption", "geoLevelOption", "colLevelOption", "animLevelOption"},
+            "custom_level_name": {"levelName", "geoLevelName", "colLevelName", "animLevelName"},
+            "non_decomp_level": {"levelCustomExport"},
+            "export_header_type": {"geoExportHeaderType", "colExportHeaderType", "animExportHeaderType"},
+            "custom_include_directory": {"geoTexDir"},
+        }
         for scene in bpy.data.scenes:
             sm64_props: SM64_Properties = scene.fast64.sm64
             sm64_props.address_converter.upgrade_changed_props(scene)
@@ -119,7 +132,36 @@ class SM64_Properties(PropertyGroup):
             for old, new in old_scene_props_to_new.items():
                 upgrade_old_prop(sm64_props, new, scene, old)
             upgrade_old_prop(sm64_props, "show_importing_menus", sm64_props, "showImportingMenus")
+
+            combined_props = scene.fast64.sm64.combined_export
+            for new, old in old_export_props_to_new.items():
+                upgrade_old_prop(combined_props, new, scene, old)
             sm64_props.version = SM64_Properties.cur_version
+
+    def to_repo_settings(self):
+        data = {}
+        data["refresh_version"] = self.refresh_version
+        data["compression_format"] = self.compression_format
+        data["force_extended_ram"] = self.force_extended_ram
+        data["matstack_fix"] = self.matstack_fix
+        return data
+
+    def from_repo_settings(self, data: dict):
+        set_prop_if_in_data(self, "refresh_version", data, "refresh_version")
+        set_prop_if_in_data(self, "compression_format", data, "compression_format")
+        set_prop_if_in_data(self, "force_extended_ram", data, "force_extended_ram")
+        set_prop_if_in_data(self, "matstack_fix", data, "matstack_fix")
+
+    def draw_repo_settings(self, layout: UILayout):
+        col = layout.column()
+        if not self.binary_export:
+            col.prop(self, "disable_scroll")
+            col.prop(self, "fix_coop_fog")
+            col.prop(self, "add_coop_reverts")
+            prop_split(col, self, "compression_format", "Compression Format")
+            prop_split(col, self, "refresh_version", "Refresh (Function Map)")
+            col.prop(self, "force_extended_ram")
+        col.prop(self, "matstack_fix")
 
     def draw_props(self, layout: UILayout, show_repo_settings: bool = True):
         col = layout.column()
@@ -140,16 +182,9 @@ class SM64_Properties(PropertyGroup):
             directory_ui_warnings(col, abspath(self.decomp_path))
         col.separator()
 
-        if not self.binary_export:
-            col.prop(self, "disable_scroll")
-            col.prop(self, "fix_coop_fog")
-            col.prop(self, "add_coop_reverts")
-            if show_repo_settings:
-                prop_split(col, self, "compression_format", "Compression Format")
-                prop_split(col, self, "refresh_version", "Refresh (Function Map)")
-                col.prop(self, "force_extended_ram")
-                col.prop(self, "matstack_fix")
-        col.separator()
+        if show_repo_settings:
+            self.draw_repo_settings(col)
+            col.separator()
 
         col.prop(self, "show_importing_menus")
         if self.show_importing_menus:

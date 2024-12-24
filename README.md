@@ -60,6 +60,8 @@ It allows you to export the anims as lua files in your Custom Export Path Folder
 # Metal Material Preset (For non-template users)
 
 You can make a material and set the Preset to Sm64 Metal Texture:
+
+
 ![image](https://github.com/user-attachments/assets/575eb393-df11-4bbc-ab27-bf10db7a9eab)
 
 

@@ -57,15 +57,9 @@ There's a New option called "SMLUA Animation" in the Animation Exporter:
 It allows you to export the anims as lua files in your Custom Export Path Folder:
 ![image](https://github.com/user-attachments/assets/5e6a37cb-d33c-4dd1-b03b-a292e2964ab4)
 
-# Create Metal Material Option (For non-template users)
+# Metal Material Preset (For non-template users)
 
-A new option under the Create Fast3D material option is added:
-![image](https://github.com/user-attachments/assets/0e6bbd66-efb1-43fe-bf98-c903532bc1d6)
-
-If you click it, It will generate a Fast3D Material With these properties:
-![image](https://github.com/user-attachments/assets/1c7d1d25-0035-4b8a-ba12-8be4175810af)
-
-Or you can make a material and set the Preset to Sm64 Metal Texture:
+You can make a material and set the Preset to Sm64 Metal Texture:
 ![image](https://github.com/user-attachments/assets/575eb393-df11-4bbc-ab27-bf10db7a9eab)
 
 For Texture 0, select the custom_mario_metal_shade.png from the repo's coop-metal-textures folder.

@@ -1,6 +1,6 @@
 # Fast64 Gart Edition
 
-Modification of Fast64, Supports Blender 3.6 to 4.2.
+Modification of Fast64, Supports Blender 3.6 to 4.3.
 
 Mainly used for Coop and Also supports V6 Mats.
 

@@ -553,7 +553,8 @@ class CoopRecolorCommands:
     def to_c(self):
         return ("GEO_ASM(" + "LAYER_OPAQUE + 3" + ", " + "geo_mario_set_player_colors" + "),\n" +
         "GEO_ASM(" + "LAYER_ALPHA + 3" + ", " + "geo_mario_set_player_colors" + "),\n" +
-        "GEO_ASM(" + "LAYER_TRANSPARENT + 3" + ", " + "geo_mario_set_player_colors" + "),\n")
+        "GEO_ASM(" + "LAYER_TRANSPARENT + 3" + ", " + "geo_mario_set_player_colors" + "),\n" + 
+        "GEO_ASM(" + "LAYER_TRANSPARENT_DECAL + 3" + ", " + "geo_mario_set_player_colors" + "),\n")
     
 
 # copy paste lmfao
@@ -576,7 +577,8 @@ class CoopMirrorCommands:
     def to_c(self):
         return ("GEO_ASM(" + "LAYER_OPAQUE << 2" + ", " + "geo_mirror_mario_backface_culling" + "),\n" +
         "GEO_ASM(" + "LAYER_ALPHA << 2" + ", " + "geo_mirror_mario_backface_culling" + "),\n" +
-        "GEO_ASM(" + "LAYER_TRANSPARENT << 2" + ", " + "geo_mirror_mario_backface_culling" + "),\n")
+        "GEO_ASM(" + "LAYER_TRANSPARENT << 2" + ", " + "geo_mirror_mario_backface_culling" + "),\n" +
+        "GEO_ASM(" + "LAYER_TRANSPARENT_DECAL << 2" + ", " + "geo_mirror_mario_backface_culling" + "),\n")
     
 #2
 class CoopMirrorCommands2:
@@ -598,7 +600,8 @@ class CoopMirrorCommands2:
     def to_c(self):
         return ("GEO_ASM(" + "(LAYER_OPAQUE << 2) | 1" + ", " + "geo_mirror_mario_backface_culling" + "),\n" +
         "GEO_ASM(" + "(LAYER_ALPHA << 2) | 1" + ", " + "geo_mirror_mario_backface_culling" + "),\n" +
-        "GEO_ASM(" + "(LAYER_TRANSPARENT << 2) | 1" + ", " + "geo_mirror_mario_backface_culling" + "),\n")
+        "GEO_ASM(" + "(LAYER_TRANSPARENT << 2) | 1" + ", " + "geo_mirror_mario_backface_culling" + "),\n" +
+        "GEO_ASM(" + "(LAYER_TRANSPARENT_DECAL << 2) | 1" + ", " + "geo_mirror_mario_backface_culling" + "),\n")
 
 
 class HeldObjectNode:

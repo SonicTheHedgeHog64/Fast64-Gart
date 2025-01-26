@@ -182,6 +182,7 @@ class SM64_CreateSimpleLevel(OperatorBase):
             area_object.areaIndex = area_num
 
             custom_level_id = "LEVEL_BOB"
+            custom_level_enum = "bob"
             for key, value in levelIDNames.items():
                 if value == combined_export.level_name:
                     custom_level_id = key
@@ -189,7 +190,7 @@ class SM64_CreateSimpleLevel(OperatorBase):
             area_object.warpNodes.add()
             area_object.warpNodes[-1].warpID = "0x0A"  # Spin warp
             area_object.warpNodes[-1].destLevel = custom_level_id
-            area_object.warpNodes[-1].destLevelEnum = combined_export.export_level_name
+            area_object.warpNodes[-1].destLevelEnum = custom_level_enum
             area_object.warpNodes[-1].destNode = "0x0A"
 
             area_object.warpNodes.add()

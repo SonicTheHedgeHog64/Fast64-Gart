@@ -40,7 +40,7 @@ def parseDirection(index: int, values: tuple[str, str, str]) -> tuple[float, flo
 
     if tuple(values) == (0, 0, 0):
         return "Zero"
-    elif index == 0 and tuple(values) == (0x28, 0x28, 0x28):
+    elif index == 0 and tuple(values) == (0x49, 0x49, 0x49):
         return "Default"
     elif index == 1 and tuple(values) == (0xB7, 0xB7, 0xB7):
         return "Default"

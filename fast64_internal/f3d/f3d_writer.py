@@ -1556,7 +1556,7 @@ def getLightDefinitions(fModel, material, lightsName=""):
 
     if material.use_default_lighting:
         lights.a = Ambient(exportColor(material.ambient_light_color))
-        lights.l.append(Light(exportColor(material.default_light_color), [0x49, 0x49, 0x49]))
+        lights.l.append(Light(exportColor(material.default_light_color), [0x28, 0x28, 0x28]))
     else:
         lights.a = Ambient(exportColor(material.ambient_light_color))
 

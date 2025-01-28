@@ -2900,6 +2900,11 @@ class SM64_ExportGeolayoutObject(ObjectDataExporter):
                     props.is_actor_custom_export,
                     DLFormat.Static,
                 )
+                if props.is_actor_custom_export and props.delete_all_bins:
+                    for filename in os.listdir(export_path):
+                        file_path = os.path.join(export_path, filename)
+                        if os.path.isfile(file_path) and filename.endswith('.bin'):
+                            os.remove(file_path)
                 self.report({"INFO"}, "Success!")
             elif context.scene.fast64.sm64.export_type == "Insertable Binary":
                 exportGeolayoutObjectInsertableBinary(
@@ -3097,6 +3102,11 @@ class SM64_ExportGeolayoutArmature(bpy.types.Operator):
                     props.is_actor_custom_export,
                     DLFormat.Static,
                 )
+                if props.is_actor_custom_export and props.delete_all_bins:
+                    for filename in os.listdir(export_path):
+                        file_path = os.path.join(export_path, filename)
+                        if os.path.isfile(file_path) and filename.endswith('.bin'):
+                            os.remove(file_path)
                 starSelectWarning(self, fileStatus)
                 self.report({"INFO"}, "Success!")
             elif context.scene.fast64.sm64.export_type == "Insertable Binary":

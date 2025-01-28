@@ -2004,6 +2004,10 @@ class SM64_CombinedObjectProperties(bpy.types.PropertyGroup):
     collision_object: bpy.props.PointerProperty(type=bpy.types.Object)
     graphics_object: bpy.props.PointerProperty(type=bpy.types.Object)
 
+    #coop
+    delete_all_bins: bpy.props.BoolProperty(name="Delete all .bin Files")
+    delete_all_cols: bpy.props.BoolProperty(name="Delete all .col Files")
+
     # is this abuse of properties?
     @property
     def col_object(self):
@@ -2276,6 +2280,8 @@ class SM64_CombinedObjectProperties(bpy.types.PropertyGroup):
 
         if self.export_header_type == "Custom":
             prop_split(box, self, "custom_export_path", "Custom Path")
+            prop_split(box, self, "delete_all_bins", "Delete all .bin files")
+            prop_split(box, self, "delete_all_cols", "Delete all .col files")
             if bpy.context.scene.saveTextures:
                 prop_split(box, self, "custom_include_directory", "Texture Include Directory")
 

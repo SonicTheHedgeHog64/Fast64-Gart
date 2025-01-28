@@ -2004,7 +2004,7 @@ class SM64_CombinedObjectProperties(bpy.types.PropertyGroup):
     collision_object: bpy.props.PointerProperty(type=bpy.types.Object)
     graphics_object: bpy.props.PointerProperty(type=bpy.types.Object)
 
-    #coop
+    #coop 
     delete_all_bins: bpy.props.BoolProperty(name="Delete all .bin Files")
     delete_all_cols: bpy.props.BoolProperty(name="Delete all .col Files")
 

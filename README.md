@@ -101,8 +101,12 @@ If you enable it in a bone, it exports these for mirror mario:
 ![image](https://github.com/user-attachments/assets/f84e62b0-7e75-4aa8-942a-83149abef9ce)
 
 # Delete all .bins and .cols
-If you enable these under SM64 Combined Exporter in Export Graphics, your bin and col files will get deleted respectively:
-![image](https://github.com/user-attachments/assets/df9051c1-f13c-4d2e-b8d1-bbd47e3b8cd2)
+
+If you enable these under SM64 Combined Exporter in Export Graphics when you have Custom as the export type, your bin and col files will get deleted respectively:
+
+
+![image](https://github.com/user-attachments/assets/7940ff9b-6b25-4520-9560-bed7bac5cb3c)
+
 
 
 

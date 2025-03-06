@@ -1236,6 +1236,12 @@ class SM64_ExportLevel(ObjectDataExporter):
             applyRotation([obj], math.radians(-90), "X")
             self.cleanup_temp_object_data()
 
+            if props.non_decomp_level and props.delete_all_lvls:
+                    for filename in os.listdir(export_path):
+                        file_path = os.path.join(export_path, filename)
+                        if os.path.isfile(file_path) and filename == "level_"+level_name+"_entry.lvl":
+                            os.remove(file_path)
+
             self.report({"INFO"}, "Success!")
             self.show_warnings()
             return {"FINISHED"}  # must return a set

@@ -2007,6 +2007,7 @@ class SM64_CombinedObjectProperties(bpy.types.PropertyGroup):
     #coop  
     delete_all_bins: bpy.props.BoolProperty(name="Delete all .bin Files")
     delete_all_cols: bpy.props.BoolProperty(name="Delete all .col Files")
+    delete_all_lvls: bpy.props.BoolProperty(name="Delete all .lvl Files")
 
     # is this abuse of properties?
     @property
@@ -2256,6 +2257,7 @@ class SM64_CombinedObjectProperties(bpy.types.PropertyGroup):
             prop_split(box, self, "level_name", "Level")
         if self.is_custom_level:
             prop_split(box, self, "custom_level_name", "Name")
+            prop_split(box, self, "delete_all_lvls", "Delete .lvl file")
         self.draw_level_path(box.box())
         col.separator()
         # object exports

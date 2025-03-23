@@ -179,6 +179,7 @@ F3D_GEO_MODES = {
     "texGenLinear": "g_tex_gen_linear",
     "lod": "g_lod",
     "shadeSmooth": "g_shade_smooth",
+    "lightingEngine": "g_lighting_engine"
 }
 
 F3DLX_GEO_MODES = {
@@ -599,8 +600,8 @@ def ui_geo_mode(settings, dataHolder, layout, useDropdown):
                 zInBlender = settings.z_cmp or settings.z_upd
 
         draw_mode(inputGroup, "g_shade_smooth")
-
         c = indentGroup(inputGroup, "g_lighting", False)
+        draw_mode(inputGroup, "g_lighting_engine")
         if ccWarnings and not shadeInCC and is_on("g_lighting") and not is_on("g_tex_gen"):
             multilineLabel(c, "Shade not used in CC, can disable\nlighting.", icon="INFO")
         draw_mode(c, "g_packed_normals", "g_lighting_specular", "g_ambocclusion", "g_fresnel_color")
@@ -615,7 +616,7 @@ def ui_geo_mode(settings, dataHolder, layout, useDropdown):
             shadeColorLabel = "Lighting * vertex color"
         if is_on("g_fresnel_color"):
             shadeColorLabel = "Fresnel"
-        elif not is_on("g_lighting") or is_on("g_lighttoalpha"):
+        elif not is_on("g_lighting") or is_on("g_lighttoalpha") or is_on("g_lighting_engine"):
             shadeColorLabel = "Vertex color"
         elif is_on("g_lighting") and is_on("g_packed_normals") and not is_on("g_lighttoalpha"):
             shadeColorLabel = "Lighting * vertex color"
@@ -3464,6 +3465,12 @@ class RDPSettings(PropertyGroup):
         default=False,
         update=update_node_values_with_preset,
         description="Enables calculating shade color using lights. Turn off for vertex colors as shade color",
+    )
+    g_lighting_engine: bpy.props.BoolProperty(
+        name="Lighting Engine",
+        default=False,
+        update=update_node_values_with_preset,
+        description="Uses vertex colors for lighting (incompatible with lightmaps)"
     )
     g_tex_gen: bpy.props.BoolProperty(
         name="Texture UV Generate",

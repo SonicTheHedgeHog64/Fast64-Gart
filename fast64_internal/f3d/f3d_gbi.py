@@ -355,6 +355,7 @@ class F3D:
             self.G_CULL_BOTH = 0x00003000  # To make code cleaner
         self.G_FOG = 0x00010000
         self.G_LIGHTING = 0x00020000
+        self.G_LIGHTING_ENGINE_EXT = 0x00004000
         self.G_TEXTURE_GEN = 0x00040000
         self.G_TEXTURE_GEN_LINEAR = 0x00080000
         self.G_LOD = 0x00100000  # NOT IMPLEMENTED
@@ -383,6 +384,7 @@ class F3D:
             "G_CULL_BOTH",
             "G_FOG",
             "G_LIGHTING",
+            "G_LIGHTING_ENGINE_EXT",
             "G_TEXTURE_GEN",
             "G_TEXTURE_GEN_LINEAR",
             "G_LOD",
@@ -404,6 +406,7 @@ class F3D:
 
         self.G_FOG_H = self.G_FOG / 0x10000
         self.G_LIGHTING_H = self.G_LIGHTING / 0x10000
+        self.G_LIGHTING_ENGINE_EXT_H = self.G_LIGHTING_ENGINE_EXT / 0x10000
         self.G_TEXTURE_GEN_H = self.G_TEXTURE_GEN / 0x10000
         self.G_TEXTURE_GEN_LINEAR_H = self.G_TEXTURE_GEN_LINEAR / 0x10000
         self.G_LOD_H = self.G_LOD / 0x10000  # NOT IMPLEMENTED

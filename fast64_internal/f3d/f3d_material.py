@@ -179,6 +179,7 @@ F3D_GEO_MODES = {
     "texGenLinear": "g_tex_gen_linear",
     "lod": "g_lod",
     "shadeSmooth": "g_shade_smooth",
+    "lightingEngine": "g_lighting_engine"
 }
 
 F3DLX_GEO_MODES = {
@@ -599,8 +600,8 @@ def ui_geo_mode(settings, dataHolder, layout, useDropdown):
                 zInBlender = settings.z_cmp or settings.z_upd
 
         draw_mode(inputGroup, "g_shade_smooth")
-
         c = indentGroup(inputGroup, "g_lighting", False)
+        draw_mode(inputGroup, "g_lighting_engine")
         if ccWarnings and not shadeInCC and is_on("g_lighting") and not is_on("g_tex_gen"):
             multilineLabel(c, "Shade not used in CC, can disable\nlighting.", icon="INFO")
         draw_mode(c, "g_packed_normals", "g_lighting_specular", "g_ambocclusion", "g_fresnel_color")
@@ -615,7 +616,7 @@ def ui_geo_mode(settings, dataHolder, layout, useDropdown):
             shadeColorLabel = "Lighting * vertex color"
         if is_on("g_fresnel_color"):
             shadeColorLabel = "Fresnel"
-        elif not is_on("g_lighting") or is_on("g_lighttoalpha"):
+        elif not is_on("g_lighting") or is_on("g_lighttoalpha") or is_on("g_lighting_engine"):
             shadeColorLabel = "Vertex color"
         elif is_on("g_lighting") and is_on("g_packed_normals") and not is_on("g_lighttoalpha"):
             shadeColorLabel = "Lighting * vertex color"
@@ -911,7 +912,7 @@ class F3DPanel(Panel):
 
             if f3d_mat.use_default_lighting:
                 lightSettings.prop(f3d_mat, "default_light_color", text="Light Color")
-
+      
                 # Player part for coop
                 prop_split(layout, f3d_mat.coopplayerpart, "sm64", "Coop Player Part")
                 if f3d_mat.coopplayerpart.sm64 != "None":
@@ -1136,10 +1137,29 @@ class F3DPanel(Panel):
             if showCheckBox:
                 inputGroup.prop(f3dMat, "set_fog", text="Set Fog")
             if f3dMat.set_fog:
-                inputGroup.prop(f3dMat, "use_global_fog", text="Use Global Fog (SM64)")
-                if f3dMat.use_global_fog:
-                    inputGroup.label(text="Only applies to levels (area fog settings).", icon="INFO")
-                else:
+                draw_fog = True
+                if bpy.context.scene.gameEditorMode == "SM64":
+                    obj, area_obj = bpy.context.object.parent, None
+                    while obj:
+                        if obj.type == "EMPTY" and obj.sm64_obj_type == "Area Root" and obj.fast64.sm64.area.set_fog:
+                            area_obj = obj
+                            break
+                        obj = obj.parent
+                    if area_obj:
+                        inputGroup.prop(f3dMat, "use_global_fog", text=f'Use Area "{area_obj.name}"\'s Fog')
+                        if f3dMat.use_global_fog:
+                            settings_col = inputGroup.column()
+                            settings_col.enabled = not f3dMat.use_global_fog
+                            prop_split(settings_col.row(), area_obj, "area_fog_color", "Fog Color")
+                            prop_split(settings_col.row(), area_obj, "area_fog_position", "Fog Range")
+                            draw_fog = False
+                    else:
+                        # show setting for preview
+                        inputGroup.prop(f3dMat, "use_global_fog", text="Use Area's Fog")
+                        inputGroup.label(
+                            text="Preview only in this context, no area fog settings to pick up", icon="INFO"
+                        )
+                if draw_fog:
                     prop_split(inputGroup.row(), f3dMat, "fog_color", "Fog Color")
                     prop_split(inputGroup.row(), f3dMat, "fog_position", "Fog Range")
 
@@ -1792,7 +1812,11 @@ def update_fog_nodes(material: Material, context: Context):
     else:  # If fog is not being calculated, pass in shade alpha
         material.node_tree.links.new(nodes["Shade Color"].outputs["Alpha"], fogBlender.inputs["FogAmount"])
 
-    if f3dMat.use_global_fog or not f3dMat.set_fog or inherit_light_and_fog():  # Inherit fog
+    if (
+        (bpy.context.scene.gameEditorMode == "SM64" and f3dMat.use_global_fog)
+        or not f3dMat.set_fog
+        or inherit_light_and_fog()
+    ):  # Inherit fog
         link_if_none_exist(material, nodes["SceneProperties"].outputs["FogColor"], nodes["FogColor"].inputs[0])
         link_if_none_exist(material, nodes["GlobalFogColor"].outputs[0], fogBlender.inputs["Fog Color"])
         link_if_none_exist(material, nodes["SceneProperties"].outputs["FogNear"], nodes["CalcFog"].inputs["FogNear"])
@@ -3442,6 +3466,12 @@ class RDPSettings(PropertyGroup):
         update=update_node_values_with_preset,
         description="Enables calculating shade color using lights. Turn off for vertex colors as shade color",
     )
+    g_lighting_engine: bpy.props.BoolProperty(
+        name="Lighting Engine",
+        default=False,
+        update=update_node_values_with_preset,
+        description="Uses vertex colors for lighting (incompatible with lightmaps)"
+    )
     g_tex_gen: bpy.props.BoolProperty(
         name="Texture UV Generate",
         default=False,
@@ -4950,7 +4980,6 @@ mat_classes = (
     AddPresetF3D,
     F3DPanel,
     CreateFast3DMaterial,
-    CreateFast3DMetalMaterial,
     RecreateF3DNodes,
     TextureFieldProperty,
     SetTileSizeScrollProperty,

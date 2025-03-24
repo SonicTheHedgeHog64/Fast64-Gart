@@ -355,6 +355,7 @@ class F3D:
             self.G_CULL_BOTH = 0x00003000  # To make code cleaner
         self.G_FOG = 0x00010000
         self.G_LIGHTING = 0x00020000
+        self.G_LIGHTING_ENGINE_EXT = 0x00004000
         self.G_TEXTURE_GEN = 0x00040000
         self.G_TEXTURE_GEN_LINEAR = 0x00080000
         self.G_LOD = 0x00100000  # NOT IMPLEMENTED
@@ -383,6 +384,7 @@ class F3D:
             "G_CULL_BOTH",
             "G_FOG",
             "G_LIGHTING",
+            "G_LIGHTING_ENGINE_EXT",
             "G_TEXTURE_GEN",
             "G_TEXTURE_GEN_LINEAR",
             "G_LOD",
@@ -404,6 +406,7 @@ class F3D:
 
         self.G_FOG_H = self.G_FOG / 0x10000
         self.G_LIGHTING_H = self.G_LIGHTING / 0x10000
+        self.G_LIGHTING_ENGINE_EXT_H = self.G_LIGHTING_ENGINE_EXT / 0x10000
         self.G_TEXTURE_GEN_H = self.G_TEXTURE_GEN / 0x10000
         self.G_TEXTURE_GEN_LINEAR_H = self.G_TEXTURE_GEN_LINEAR / 0x10000
         self.G_LOD_H = self.G_LOD / 0x10000  # NOT IMPLEMENTED
@@ -2257,7 +2260,7 @@ class FAreaData:
 
 class FGlobalData:
     def __init__(self):
-        # dict of area index : FFogData
+        # dict of area index : FAreaData
         self.area_data = {}
         self.current_area_index = 1
 
@@ -2969,14 +2972,17 @@ class FTriGroup:
         return self.triList.get_ptr_addresses(f3d)
 
     def set_addr(self, startAddress, f3d):
-        addrRange = self.triList.set_addr(startAddress, f3d)
+        addrRange = (startAddress, startAddress)
+        if self.triList.tag.Export:
+            addrRange = self.triList.set_addr(startAddress, f3d)
         addrRange = self.vertexList.set_addr(addrRange[1])
         return startAddress, addrRange[1]
 
     def save_binary(self, romfile, f3d, segments):
         for celTriList in self.celTriLists:
             celTriList.save_binary(romfile, f3d, segments)
-        self.triList.save_binary(romfile, f3d, segments)
+        if self.triList.tag.Export:
+            self.triList.save_binary(romfile, f3d, segments)
         self.vertexList.save_binary(romfile)
 
     def to_c(self, f3d, gfxFormatter):
@@ -3083,15 +3089,17 @@ class FMaterial:
         return addresses
 
     def set_addr(self, startAddress, f3d):
-        addrRange = self.material.set_addr(startAddress, f3d)
-        startAddress = addrRange[0]
-        if self.revert is not None:
+        addrRange = (startAddress, startAddress)
+        if self.material.tag.Export:
+            addrRange = self.material.set_addr(addrRange[1], f3d)
+        if self.revert is not None and self.revert.tag.Export:
             addrRange = self.revert.set_addr(addrRange[1], f3d)
         return startAddress, addrRange[1]
 
     def save_binary(self, romfile, f3d, segments):
-        self.material.save_binary(romfile, f3d, segments)
-        if self.revert is not None:
+        if self.material.tag.Export:
+            self.material.save_binary(romfile, f3d, segments)
+        if self.revert is not None and self.revert.tag.Export:
             self.revert.save_binary(romfile, f3d, segments)
 
     def to_c(self, f3d):
@@ -3230,7 +3238,7 @@ class Lights:
         data.source += "\t" + self.a.to_c()
         for light in self.l:
             data.source += ",\n\t" + light.to_c()
-            data.source += ");\n\n"
+        data.source += ");\n\n"
         return data
 
 

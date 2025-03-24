@@ -904,6 +904,8 @@ class F3DContext:
             rdp_settings.g_fog = value
         if bitFlags & self.f3d.G_LIGHTING:
             rdp_settings.g_lighting = value
+        if bitFlags & self.f3d.G_LIGHTING_ENGINE_EXT:
+            rdp_settings.g_lighting_engine = value
         if bitFlags & self.f3d.G_TEXTURE_GEN:
             rdp_settings.g_tex_gen = value
         if bitFlags & self.f3d.G_TEXTURE_GEN_LINEAR:
